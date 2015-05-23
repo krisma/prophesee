@@ -4,17 +4,18 @@ Commit :: Description
 init :: rails new
 bundle :: gem added, bundle install
 model :: User model, Post resource created
+static :: rails g devise:views, controller static index
 
 = Database structure
-* Model
-User
+== Model
+* User
   devise default
   nickname:string
   quota:integer
   total_count:integer
   good_count:integer
 
-Post
+* Post
   content:string
   date_created:date
   date_publish:date
