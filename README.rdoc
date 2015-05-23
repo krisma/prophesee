@@ -3,3 +3,22 @@
 Commit :: Description
 init :: rails new
 bundle :: gem added, bundle install
+model :: User model, Post resource created
+
+= Database structure
+* Model
+User
+  devise default
+  nickname:string
+  quota:integer
+  total_count:integer
+  good_count:integer
+
+Post
+  content:string
+  date_created:date
+  date_publish:date
+  post_created:string
+  post_publish:string
+  active:boolean
+  user_id:integer
