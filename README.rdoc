@@ -5,6 +5,7 @@ init :: rails new
 bundle :: gem added, bundle install
 model :: User model, Post resource created
 static :: rails g devise:views, controller static index
+bootstrap :: bootstrap included, custom flashes
 
 = Database structure
 == Model
