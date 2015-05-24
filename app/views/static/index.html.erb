@@ -1,1 +1,8 @@
 <h1>Prophesee</h1>
+<div id="loginbox">
+	<% if user_signed_in? %>
+		<%= render 'signed_in' %>
+	<% else %>
+		<%= render 'devise/sessions/new' %>
+	<% end %>
+</div>
