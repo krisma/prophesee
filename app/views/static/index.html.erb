@@ -4,17 +4,16 @@
 	<%= render 'signed_in' %>
 	<% else %>
 	<%= render 'devise/sessions/new' %>
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Register</button>
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="Register" aria-hidden="true">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<%= render 'devise/registrations/new' %>
-			</div>
-		</div>
-	</div>
+
 	<% end %>
 
 </div>
+<div id="postbox">
+	<%= render 'posts/form' %>
+</div>
 <div id="main">
-	
+	<h5>Most recent prophesees</h5>
+	<% @posts.each do |p| %>
+		<p><%= p.content %>, <%= p.post_created %></p>
+	<% end %>
 </div>

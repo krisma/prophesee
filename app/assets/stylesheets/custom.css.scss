@@ -29,5 +29,19 @@
 
  #loginbox {
     float: right;
-    margin-right: 100px;
+    margin-right: 80px;
  }
+#styled-button {
+
+    border-color: black;
+    border-width: 1px;
+    background-color: #FFF;
+    height: 40px;
+    width: 80px;
+    margin-top: 10px;
+    color: #000;
+    border-radius: 0;
+}
+#register-container {
+    margin-top: 50px;
+}

@@ -1,8 +1,9 @@
-<h2>Sign up</h2>
+<div class="text-center" id="register-container">
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
+  <h2>Sign up</h2>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
@@ -11,7 +12,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <!-- <em>(<%= @minimum_password_length %> characters minimum)</em> -->
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
@@ -25,5 +26,5 @@
     <%= f.submit "Sign up", id: 'styled-button' %>
   </div>
 <% end %>
-
+</div>
 <%= render "devise/shared/links" %>

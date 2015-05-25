@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 20150523134906) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "total_count"
+    t.integer  "good_count"
+    t.integer  "quota"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
