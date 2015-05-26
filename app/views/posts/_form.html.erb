@@ -1,17 +1,17 @@
-<%= form_for @post, remote: true do |f| %>
+<%= form_for @post do |f| %>
   <div class="field">
     <%= f.label :Content %><br />
-    <%= f.text_field :content, autofocus: true %>
+    <%= f.text_field :content, autofocus: true, id: 'input' %>
   </div>
 
   <div class="field">
     <%= f.label :post %><br />
-    <%= f.text_field :post_created %>
+    <%= f.text_field :post_created, id: 'input' %>
   </div>
 
   <div class="field">
     <%= f.label :notice_date %><br />
-    <%= f.date_field :date_publish %>
+    <%= f.date_field :date_publish, id: 'input' %>
   </div>
 
   <div class="actions">

@@ -26,7 +26,9 @@
     color: #468847;
     text-align: left;
  }
-
+.total-container {
+    margin-top: 80px;
+}
  #loginbox {
     float: right;
     margin-right: 80px;
@@ -44,4 +46,8 @@
 }
 #register-container {
     margin-top: 50px;
+}
+#input {
+    border-color: black;
+    border-width: 1px;
 }

@@ -7,6 +7,9 @@ model :: User model, Post resource created
 static :: rails g devise:views, controller static index
 bootstrap :: bootstrap included, custom flashes
 login :: devise basic done
+before exp0 :: checkpoint
+exp0 done, login fail redirect :: login fail in index no longer redirect
+errmsg :: error messages integrated in layout
 
 = Database structure
 == Model

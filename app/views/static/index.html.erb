@@ -1,4 +1,4 @@
-<h1>Prophesee</h1>
+
 <div id="loginbox">
 	<% if user_signed_in? %>
 	<%= render 'signed_in' %>
@@ -14,6 +14,6 @@
 <div id="main">
 	<h5>Most recent prophesees</h5>
 	<% @posts.each do |p| %>
-		<p><%= p.content %>, <%= p.post_created %></p>
+	<p><%= p.content %>, <%= p.post_created %></p>
 	<% end %>
 </div>

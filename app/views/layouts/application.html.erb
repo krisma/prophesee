@@ -7,9 +7,21 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
+
 	<div class="container">
+
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="#">Prophesee</a>
+			</div>
+		</nav>
+
+		<div class="total-container">
+
 		<%= render 'layouts/messages' %>
+
 		<%= yield %>
+	</div>
 	</div>
 </body>
 </html>
