@@ -1,0 +1,5 @@
+<%= form_tag({controller: "stocks", action: "watch"}, method: "post") do %>
+    <%= label_tag(:q, "Symbol:") %>
+    <%= text_field_tag(:symbol, "", id: 'input') %>
+    <%= submit_tag("Watch", id: 'styled-button') %>
+<% end %>

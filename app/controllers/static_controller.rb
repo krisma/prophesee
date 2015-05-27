@@ -2,6 +2,8 @@ class StaticController < ApplicationController
   def index
   	@posts = Post.all
   	@post = user_signed_in?? current_user.posts.new : Post.new
+    @stocks = Stock.all
+    @watching = Watching.new
   end
 
   def resource_name

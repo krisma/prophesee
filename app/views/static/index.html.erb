@@ -4,10 +4,69 @@
 	<%= render 'signed_in' %>
 	<% else %>
 	<%= render 'devise/sessions/new' %>
-
 	<% end %>
 
+
+
 </div>
+<% if user_signed_in? %>
+<div class="panel panel-default" id="watchbox">
+	
+	<div class="panel-heading">Watchlist</div>
+	<div class="panel-body">
+
+	<% current_user.watchings.each do |w| %>
+		<div class="stock-cell">
+		<h6><%= w.stock.symbol %>
+
+
+		<span id="<%= w.id %>">
+
+		<div class="btn-group">
+ 		<button class="btn btn-default btn-lg dropdown-toggle 
+ 		<% case w.attitude %>
+ 		<% when -1 %>
+ 		btn-danger
+ 		<% when 1 %>
+ 		btn-success
+ 		<% end %>
+ 		" type="button" data-toggle="dropdown" aria-expanded="false">
+    	<% case w.attitude %>
+		<% when -1 %>
+		DOWN
+		<% when 0 %>
+		PENDING
+		<% when 1 %>
+		UP
+		<% end %>
+    	<span class="caret"></span>
+ 		</button>
+  		<ul class="dropdown-menu" role="menu">
+  			<% case w.attitude %>
+  			<% when -1 %>
+  			<li><%= link_to "UP", controller: "stocks", action: "up", id: w %></li>
+  			<li><%= link_to "PENDING", controller: "stocks", action: "neutral", id: w %></li>
+  			<% when 0 %>
+  			<li><%= link_to "UP", controller: "stocks", action: "up", id: w %></li>
+  			<li><%= link_to "DOWN", controller: "stocks", action: "down", id: w %></li>
+  			<% when 1 %>
+  			<li><%= link_to "DOWN", controller: "stocks", action: "down", id: w %></li>
+  			<li><%= link_to "PENDING", controller: "stocks", action: "neutral", id: w %></li>
+  			<% end %>
+  		</ul>
+		</div>
+
+
+		</span>
+		</h6>
+
+		<% end %>
+
+		</div>
+	</div>
+
+</div>
+<% end %>
 <div id="postbox">
 	<%= render 'posts/form' %>
 </div>
@@ -17,3 +76,9 @@
 	<p><%= p.content %>, <%= p.post_created %></p>
 	<% end %>
 </div>
+
+<div id="stockbox">
+	<%= render 'stocks/index' %>
+	<%= render 'stocks/watch' %>
+</div>
+

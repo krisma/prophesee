@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+  
+  post 'stocks/watch'
+
   get 'static/index'
+  get 'stocks/up'
+  get 'stocks/down'
+  get 'stocks/neutral'
   root:to => "static#index"
   resources :posts
   devise_for :users
