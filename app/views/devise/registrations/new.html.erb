@@ -6,7 +6,7 @@
   <h2>Sign up</h2>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, id: 'input' %>
   </div>
 
   <div class="field">
@@ -14,7 +14,7 @@
     <% if @validatable %>
     <!-- <em>(<%= @minimum_password_length %> characters minimum)</em> -->
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", id: 'input' %>
   </div>
 
   <div class="field">
