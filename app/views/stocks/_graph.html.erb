@@ -1,0 +1,30 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    google.load('visualization', '1.0', {'packages':['corechart']});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data<%= stock.symbol %> = google.visualization.arrayToDataTable(
+        [<% stock.last_five.each do |u| %>
+        ["<%= u[0] %>", <%= u[1] %>, <%= u[2] %>, <%= u[3] %>, <%= u[4] %>],
+        <% end %>
+        ]
+      // Treat first row as data as well.
+    , true);
+
+    var options = {
+      legend:'none'
+    };
+
+    var chart<%= stock.symbol %> = new google.visualization.CandlestickChart(document.getElementById('chart_div<%= stock.symbol %>'));
+
+    chart<%= stock.symbol %>.draw(data<%= stock.symbol %>, options);
+     }
+    </script>
+  </head>
+  <body>
+
+    <div id="chart_div<%= stock.symbol %>" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
