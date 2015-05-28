@@ -15,7 +15,9 @@
 	<% current_user.watchings.each do |w| %>
 		<div class="stock-cell">
 		<h6><%= w.stock.symbol %>
-
+			<%= w.stock.close %>
+			<%= w.stock.change %>
+			<%= w.stock.percent_change %>
 
 		<span id="<%= w.id %>">
 
