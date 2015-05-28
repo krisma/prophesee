@@ -5,9 +5,6 @@
 	<% else %>
 	<%= render 'devise/sessions/new' %>
 	<% end %>
-
-
-
 </div>
 <% if user_signed_in? %>
 <div class="panel panel-default" id="watchbox">
@@ -23,10 +20,12 @@
 		<span id="<%= w.id %>">
 
 		<div class="btn-group">
- 		<button class="btn btn-default btn-lg dropdown-toggle 
+ 		<button class="btn btn-outline btn-md dropdown-toggle 
  		<% case w.attitude %>
  		<% when -1 %>
  		btn-danger
+ 		<% when 0 %>
+ 		btn-warning
  		<% when 1 %>
  		btn-success
  		<% end %>
@@ -35,7 +34,7 @@
 		<% when -1 %>
 		DOWN
 		<% when 0 %>
-		PENDING
+		NEUTRAL
 		<% when 1 %>
 		UP
 		<% end %>
@@ -45,13 +44,13 @@
   			<% case w.attitude %>
   			<% when -1 %>
   			<li><%= link_to "UP", controller: "stocks", action: "up", id: w %></li>
-  			<li><%= link_to "PENDING", controller: "stocks", action: "neutral", id: w %></li>
+  			<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: w %></li>
   			<% when 0 %>
   			<li><%= link_to "UP", controller: "stocks", action: "up", id: w %></li>
   			<li><%= link_to "DOWN", controller: "stocks", action: "down", id: w %></li>
   			<% when 1 %>
   			<li><%= link_to "DOWN", controller: "stocks", action: "down", id: w %></li>
-  			<li><%= link_to "PENDING", controller: "stocks", action: "neutral", id: w %></li>
+  			<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: w %></li>
   			<% end %>
   		</ul>
 		</div>
