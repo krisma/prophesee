@@ -2,6 +2,16 @@ class Stock < ActiveRecord::Base
 	has_many :watchings
 	has_many :users, through: :watchings
 	
+	def watchlist
+		request = []
+		current_user.stocks.each do |s|
+			request << s.symbol
+		end
+		response = YahooFinance.quotes(request, [:close, :change_and_percent_change])
+		return response
+	end
+	
+
 	def close
 		return YahooFinance.quotes([self.symbol],[:close])[0].close
 	end
