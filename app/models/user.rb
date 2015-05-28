@@ -25,4 +25,14 @@ class User < ActiveRecord::Base
   def watching?(symbol)
     return self.stocks.find_by_symbol(symbol)
   end
+
+
+  def watchlist
+    request = []
+    self.stocks.each do |s|
+      request << s.symbol
+    end
+    response = YahooFinance.quotes(request, [:symbol, :close, :change_and_percent_change])
+    return response
+  end
 end

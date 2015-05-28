@@ -29,8 +29,8 @@
 .total-container {
     margin-top: 80px;
 }
- #loginbox {
-    float: right;
+#loginbox {
+
     margin-right: 80px;
  }
 #styled-button {
@@ -52,11 +52,26 @@
     border-width: 1px;
 }
 #watchbox {
-    width: 70%;
 }
-.stock-cell h6{
-    font-size: 25px;
+.stock-cell {
+    padding-top: 40px;
+}
+.stock-cell p{
+    font-size: 22px;
+    padding-top: 5px;
 }
 #stock-modal-width {
     width: 450px;
+}
+#stock-modal-height {
+    height: 250px;
+}
+#attitude-button {
+    width: 90px;
+    border-radius: 0;
+}
+#history-button {
+    background-color: transparent;
+    border-color: black;
+    border-radius: 0;
 }
