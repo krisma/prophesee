@@ -7,14 +7,11 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p>Symbol</p></div>
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p>Close</p></div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p>Change</p></div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p>%Change</p></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p>Change/%</p></div>
 					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><p>History</p></div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p>Prediction</p></div>
 					<% current_user.watchlist.each do |w| %>
-
 					<div class="stock-cell">
-
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p><%= w.symbol %></p></div>
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p><%= w.close %></p></div>
 						<% change = w.change_and_percent_change.split[0] %>
@@ -26,9 +23,9 @@
 						<% else %>
 							<% color_id = "rgb(217, 83, 79)" %>
 						<% end %>
-						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p style="color: <%= color_id %>;"><%= change %></p></div>
-						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p style="color: <%= color_id %>;"><%= percent %></p></div>
-
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+							<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="<%= percent %>" id="price-tooltip" style="padding: 0;"><p style="color: <%= color_id %>; margin-top: -2px"><%= change %></p></button>
+						</div>	
 						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 							<% @s = Stock.find_by_symbol(w.symbol) %>
 							<!-- Button trigger modal -->
