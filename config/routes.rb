@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'stocks/down'
   get 'stocks/neutral'
   root:to => "static#index"
+  get 'market' => 'static#market'
+  get 'community' => 'static#community'
   resources :posts
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

@@ -17,9 +17,12 @@ $(function () {
 
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
+				<ul class="nav navbar-nav">
 				<a class="navbar-brand" href="#">Prophesee</a>
-				 <ul class="nav navbar-nav navbar-right">
-				 </ul>
+				<li class="<%= @page_tab == "index"? "active" : "" %>"><%= link_to "Dashboard", root_path %></li>
+				<li class="<%= @page_tab == "market"? "active" : "" %>"><%= link_to "Market", market_path %></li>
+				<li class="<%= @page_tab == "community"? "active" : "" %>"><%= link_to "Community", community_path %></li>
+			</ul>
 			</div>
 		</nav>
 
