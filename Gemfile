@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Custom
 gem 'devise', '~> 3.4.0' 
 gem 'bootstrap-sass', '~> 3.3.4'
+gem 'will_paginate', '~> 3.0.6'
 gem 'yahoo-finance', require: 'yahoo_finance'
 # End
 

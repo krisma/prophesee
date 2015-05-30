@@ -3,7 +3,21 @@ class Stock < ActiveRecord::Base
 	has_many :users, through: :watchings
 	
 
-	
+	def total
+		return self.up + self.neutral + self.down
+	end
+
+	def uppercent
+		return self.up.to_f / self.total
+	end
+
+	def neutralpercent
+		return self.neutral.to_f / self.total
+	end
+
+	def downpercent
+		return self.down.to_f / self.total
+	end
 
 	def close
 		return YahooFinance.quotes([self.symbol],[:close])[0].close
