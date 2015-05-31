@@ -2,7 +2,10 @@ class StocksController < ApplicationController
   before_action :authenticate_user!
   def index
   end
-
+  def search
+    @stock = Stock.find_by_symbol(params[:search])
+    flash[:notice] = "success"
+  end
   def watch
   	@stock = Stock.find_by_symbol(params[:symbol].to_s.upcase)
   	if @stock

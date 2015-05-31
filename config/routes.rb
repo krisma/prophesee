@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root:to => "static#index"
   get 'market' => 'static#market'
   get 'community' => 'static#community'
+  post 'search' => 'stocks#search'
   resources :posts
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

@@ -5,7 +5,9 @@ class StaticController < ApplicationController
     @stocks = Stock.all
     @watching = Watching.new
   end
-
+  def market
+    @stocks = Stock.all
+  end
   def resource_name
     :user
   end
