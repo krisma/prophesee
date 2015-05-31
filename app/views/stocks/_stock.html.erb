@@ -1,6 +1,6 @@
 <div class="stock-cell" id="return">
-	<p><%= @stock.symbol %><%= @stock.close %></p>
-	<div class="progress">
+	<p><%= link_to @stock.symbol, @stock  %><%= @stock.close %></p>
+	<div class="progress" id="short-progress-bar">
 		<div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= @stock.uppercent %>%">
 			<span class="sr-only"><%= @stock.uppercent %>% UP</span>
 		</div>

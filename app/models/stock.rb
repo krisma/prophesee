@@ -3,6 +3,8 @@ class Stock < ActiveRecord::Base
 	has_many :users, through: :watchings
 	before_create :set_random_default
 
+
+
 	def set_default
 		self.up = 0
 		self.down = 0
@@ -50,5 +52,9 @@ class Stock < ActiveRecord::Base
 			rtn.insert(0, [t.trade_date[5...t.trade_date.size], t.high.to_f, t.open.to_f, t.close.to_f, t.low.to_f])
 		end
 		return rtn
+	end
+
+	def get_detail
+		return YahooFinance.quotes([self.symbol], [:days_range, :weeks_range_52, :open, :volume, :market_capitalization, :pe_ratio, :dividend_yield, :eps_estimate_current_year , :shares_owned])[0]
 	end
 end

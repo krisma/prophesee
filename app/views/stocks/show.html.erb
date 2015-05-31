@@ -1,1 +1,29 @@
-<%= @stock.symbol %>
+<div id="stocks-show-stock-symbol">
+	<p><%= @stock.symbol %></p>
+</div>
+<hr>
+<div class="row">
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+
+<div id="stocks-show-stock-close">
+	<p><%= @stock.close %></p>
+</div>
+
+
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<% detail = @stock.get_detail %>
+	<b data-toggle="tooltip" data-placement="right" title="Price range (low - high) in the latest trading day." id="price-tooltip" style="color: grey;">Range: </b><b style=""><%= detail.days_range %></b><br>
+	<b data-toggle="tooltip" data-placement="right" title="Price range (low - high) in the last 52 weeks." id="price-tooltip" style="color: grey;">Week52: </b><b style=""><%= detail.weeks_range_52 %></b><br>
+	<b data-toggle="tooltip" data-placement="right" title="Opening price on the latest trading day." id="price-tooltip" style="color: grey;">Open: </b><b style=""><%= detail.open %></b><br>
+	<b data-toggle="tooltip" data-placement="right" title="The number of shares traded on the latest trading day." id="price-tooltip" style="color: grey;">Vol: </b><b style=""><%= detail.volume %></b><br>
+	<b data-toggle="tooltip" data-placement="right" title="The total value of a company in the stock market. It is generally calculated by multiplying the shares outstanding by the current share price." id="price-tooltip" style="color: grey;">Mkt cap: </b><b style=""><%= detail.market_capitalization %></b><br>
+	<b data-toggle="tooltip" data-placement="right" title="The share price divided by the earnings per share." id="price-tooltip" style="color: grey;">P/E: </b><b style=""><%= detail.pe_ratio %></b><br>
+	<b data-toggle="tooltip" data-placement="right" title="Latest dividend is dividend per share paid to shareholders in the most recent quarter. Dividend yield is the value of the latest dividend, multiplied by the number of times dividends are typically paid per year, divided by the stock price." id="price-tooltip" style="color: grey;">Div/yield: </b><b style=""><%= detail.dividend_yield %></b><br>
+	<b data-toggle="tooltip" data-placement="right" title="The net income over the last four quarters divided by the shares outstanding." id="price-tooltip" style="color: grey;">EPS: </b><b style=""><%= detail.eps_estimate_current_year %></b><br>
+	<b data-toggle="tooltip" data-placement="right" title="The number of shares held by investors and company insiders, excluding dilutive securities such as non-vested RSUs and unexercised options." id="price-tooltip" style="color: grey;">Shares: </b><b style=""><%= detail.shares_owned %></b>
+
+</div>
+</div>
