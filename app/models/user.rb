@@ -9,9 +9,10 @@ class User < ActiveRecord::Base
   has_many :stocks, through: :watchings
 
   def set_default
-  	self.total_count = 0
-  	self.good_count = 0
-  	self.quota = 3
+  	self.nickname = 'N/A'
+    self.rank = 0.0
+    self.photo = 'N/A'
+  	self.quota = 5
   end
 
   def accuracy

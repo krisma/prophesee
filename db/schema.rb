@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 20150527022732) do
 
   create_table "stocks", force: :cascade do |t|
     t.string   "symbol"
+    t.integer  "up"
+    t.integer  "down"
+    t.integer  "neutral"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,8 +47,9 @@ ActiveRecord::Schema.define(version: 20150527022732) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "total_count"
-    t.integer  "good_count"
+    t.string   "nickname"
+    t.float    "rank"
+    t.string   "photo"
     t.integer  "quota"
     t.datetime "created_at"
     t.datetime "updated_at"

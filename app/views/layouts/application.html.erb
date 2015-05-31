@@ -5,33 +5,35 @@
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<%= csrf_meta_tags %>
-<script type="text/javascript">
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
+	<script type="text/javascript">
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+	</script>
 </head>
 <body>
-
 	<div class="container">
-
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<ul class="nav navbar-nav">
-				<a class="navbar-brand" href="#">Prophesee</a>
-				<li class="<%= @page_tab == "index"? "active" : "" %>"><%= link_to "Dashboard", root_path %></li>
-				<li class="<%= @page_tab == "market"? "active" : "" %>"><%= link_to "Market", market_path %></li>
-				<li class="<%= @page_tab == "community"? "active" : "" %>"><%= link_to "Community", community_path %></li>
-			</ul>
+					<a class="navbar-brand" href="#">Prophesee</a>
+					<li class="<%= @page_tab == "index"? "active" : "" %>"><%= link_to "Dashboard", root_path %></li>
+					<li class="<%= @page_tab == "market"? "active" : "" %>"><%= link_to "Market", market_path %></li>
+					<li class="<%= @page_tab == "community"? "active" : "" %>"><%= link_to "Community", community_path %></li>
+				</ul>
 			</div>
 		</nav>
-
 		<div class="total-container">
-
-		<%= render 'layouts/messages' %>
-
-		<%= yield %>
-	</div>
+			<%= render 'layouts/messages' %>
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+					<%= yield %>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+					<%= render 'static/user_info' %>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

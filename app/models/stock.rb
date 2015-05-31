@@ -1,22 +1,34 @@
 class Stock < ActiveRecord::Base
 	has_many :watchings
 	has_many :users, through: :watchings
-	
+	before_create :set_random_default
+
+	def set_default
+		self.up = 0
+		self.down = 0
+		self.neutral = 0
+	end
+
+	def set_random_default
+		self.up = Random.rand(100)
+		self.neutral = Random.rand(100)
+		self.down = Random.rand(100)
+	end
 
 	def total
 		return self.up + self.neutral + self.down
 	end
 
 	def uppercent
-		return self.up.to_f / self.total
+		return self.total == 0? 0 : self.up.to_f / self.total * 100
 	end
 
 	def neutralpercent
-		return self.neutral.to_f / self.total
+		return self.total == 0? 0 : self.neutral.to_f / self.total * 100
 	end
 
 	def downpercent
-		return self.down.to_f / self.total
+		return self.total == 0? 0 : self.down.to_f / self.total * 100
 	end
 
 	def close

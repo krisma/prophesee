@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+<p>Welcome!</p>
+<p><%= current_user.photo %></p>
+<p><%= current_user.email %></p>
+<p><%= current_user.nickname %></p>
+<p><%= current_user.rank %></p>
+<%= button_to "Logout", destroy_user_session_path, :method => :delete, :id => 'styled-button' %> 
+<% else %>
+<%= render 'devise/sessions/new' %>
+<% end %>

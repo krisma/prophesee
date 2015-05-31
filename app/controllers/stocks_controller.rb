@@ -1,10 +1,9 @@
 class StocksController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:search]
   def index
   end
   def search
     @stock = Stock.find_by_symbol(params[:search])
-    flash[:notice] = "success"
   end
   def watch
   	@stock = Stock.find_by_symbol(params[:symbol].to_s.upcase)
@@ -26,12 +25,10 @@ class StocksController < ApplicationController
   	redirect_to root_path
   end
   
-  def change_state
-  	@watching = Watching.find_by(user_id: current_user.id, stock_id: @stock.id)
 
-  end
   def show
   end
+
   def up
 	@w = Watching.find_by(id: params[:id])
 	@w.attitude = 1

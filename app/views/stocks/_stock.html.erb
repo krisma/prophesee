@@ -1,0 +1,14 @@
+<div class="stock-cell" id="return">
+	<p><%= @stock.symbol %><%= @stock.close %></p>
+	<div class="progress">
+		<div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= @stock.uppercent %>%">
+			<span class="sr-only"><%= @stock.uppercent %>% UP</span>
+		</div>
+		<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: <%= @stock.neutralpercent %>%">
+			<span class="sr-only"><%= @stock.neutralpercent %>% Neutral</span>
+		</div>
+		<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: <%= @stock.downpercent %>%">
+			<span class="sr-only"><%= @stock.downpercent %>% DOWN</span>
+		</div>
+	</div>
+</div>

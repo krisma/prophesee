@@ -1,6 +1,4 @@
-<% tab "index" %>
-<div class="row">
-	<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+		<%= render 'stocks/watch' %>
 		<% if user_signed_in? %>
 		<div class="panel panel-default" id="watchbox">
 			<div class="panel-heading">Watchlist</div>
@@ -95,7 +93,6 @@
 
 
 		<% end %>
-	</div>
 <!-- <div id="postbox">
 	<%= render 'posts/form' %>
 </div>
@@ -111,14 +108,3 @@
 	<%= render 'stocks/watch' %>
 </div>
 -->
-
-	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-		<div id="loginbox">
-			<% if user_signed_in? %>
-			<%= render 'signed_in' %>
-			<% else %>
-			<%= render 'devise/sessions/new' %>
-			<% end %>
-		</div>
-	</div>
-</div>

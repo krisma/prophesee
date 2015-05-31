@@ -5,7 +5,6 @@ class CreateStocks < ActiveRecord::Migration
       t.integer :up
       t.integer :down
       t.integer :neutral
-      t.integer :diff
 
       t.timestamps null: false
     end

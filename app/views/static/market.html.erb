@@ -1,10 +1,40 @@
 <% tab "market" %>
-<%= form_tag('/search', remote: true, id: 'search-form') do %>
-  <%= text_field_tag :search, params[:search], id: 'search-box' %>
-  <%= submit_tag %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+	<%= form_tag('/search', remote: true, id: 'search-form', class: 'input-group') do %>
+	  <%= text_field_tag :search, params[:search], id: 'search-box', class: 'form-control' %>
+	  <span class="input-group-btn">
+	  <%= button_tag(type: "submit", class: "btn btn-default") do %>
+	  	Search
+	  <% end %>
+	</span>
+	<% end %>
+	<div id="return">
+		<p>Enter symbols like "AAPL" or company names like "Apple Inc."</p>
+	</div>
+  </div>
+</div>
+<div class="row">
+<% @upstocks.each do |up| %>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+	<div class="stock-cell">
+		<p><%= up.symbol %><%= up.close %></p>
+		<p><%= up.close %></p>
+		<div class="progress">
+		  <div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= up.uppercent %>%">
+		    <span class="sr-only"><%= up.uppercent %>% UP</span>
+		  </div>
+		  <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: <%= up.neutralpercent %>%">
+		    <span class="sr-only"><%= up.neutralpercent %>% Neutral</span>
+		  </div>
+		  <div class="progress-bar progress-bar-danger progress-bar-striped" style="width: <%= up.downpercent %>%">
+		    <span class="sr-only"><%= up.downpercent %>% DOWN</span>
+		  </div>
+		</div>
+	</div>
+	</div>
 <% end %>
-<div id="stocks">
-	<%= render 'stocks/index' %>
 </div>
 <div id="search-result">
 </div>

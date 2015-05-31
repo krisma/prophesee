@@ -31,9 +31,11 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
 
       ## Custom info
-      t.integer :total_count
-      t.integer :good_count
+      t.string :nickname
+      t.float :rank
+      t.string :photo
       t.integer :quota
+
       
 
       t.timestamps
