@@ -55,6 +55,6 @@ class Stock < ActiveRecord::Base
 	end
 
 	def get_detail
-		return YahooFinance.quotes([self.symbol], [:days_range, :weeks_range_52, :open, :volume, :market_capitalization, :pe_ratio, :dividend_yield, :eps_estimate_current_year , :shares_owned])[0]
+		return YahooFinance.quotes([self.symbol], [:days_range, :weeks_range_52, :open, :volume, :market_capitalization, :pe_ratio, :dividend_yield, :eps_estimate_current_year , :shares_owned, :name])[0]
 	end
 end
