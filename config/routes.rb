@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'draw_month' => 'stocks#draw_month'
   get 'draw_days' => 'stocks#draw_days'
   get 'draw_months' => 'stocks#draw_months'
+  get 'draw_year' => 'stocks#draw_year'
+  get 'draw_all' => 'stocks#draw_all'
   get 'static/index'
   get 'stocks/up'
   get 'stocks/down'

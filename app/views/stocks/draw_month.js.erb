@@ -5,6 +5,10 @@ document.getElementById("button-months").className = document.getElementById("bu
       ( /(?:^|\s)active(?!\S)/g , '' )
 document.getElementById("button-days").className = document.getElementById("button-days").className.replace
       ( /(?:^|\s)active(?!\S)/g , '' )
+document.getElementById("button-year").className = document.getElementById("button-year").className.replace
+      ( /(?:^|\s)active(?!\S)/g , '' )
+document.getElementById("button-all").className = document.getElementById("button-all").className.replace
+      ( /(?:^|\s)active(?!\S)/g , '' )
 function drawChart() {
 	var data<%= @stock.symbol %> = google.visualization.arrayToDataTable(
 		[<% @stock.last_thirty.each do |u| %>

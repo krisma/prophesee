@@ -1,27 +1,25 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <% detail = @stock.get_detail %>
 <div id="stocks-show-stock-symbol">
-	<p><%= @stock.symbol %></p><p style="color: grey;"><%= detail.name %></p>
+	<p><%= @stock.symbol %> (<%= detail.stock_exchange %>)</p><p style="color: grey;"><%= detail.name %></p>
 </div>
 <hr>
 <div class="row">
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-
 		<div id="stocks-show-stock-close">
 			<p><%= @stock.close %></p>
 		</div>
-
-		<b data-toggle="tooltip" data-placement="top" title="Price range (low - high) in the latest trading day." id="price-tooltip" style="color: grey; font-weight: 100;">Range: </b><b style=""><%= detail.days_range %></b><br>
-		<b data-toggle="tooltip" data-placement="top" title="Price range (low - high) in the last 52 weeks." id="price-tooltip" style="color: grey; font-weight: 100;">Week52: </b><b style=""><%= detail.weeks_range_52 %></b><br>
-		<b data-toggle="tooltip" data-placement="top" title="Opening price on the latest trading day." id="price-tooltip" style="color: grey; font-weight: 100;">Open: </b><b style=""><%= detail.open %></b><br>
-		<b data-toggle="tooltip" data-placement="top" title="The number of shares traded on the latest trading day." id="price-tooltip" style="color: grey; font-weight: 100;">Vol: </b><b style=""><%= number_to_human(detail.volume) %></b><br>
-		<b data-toggle="tooltip" data-placement="top" title="The total value of a company in the stock market. It is generally calculated by multiplying the shares outstanding by the current share price." id="price-tooltip" style="color: grey; font-weight: 100;">Mkt cap: </b><b style=""><%= detail.market_capitalization %></b><br>
-		<b data-toggle="tooltip" data-placement="top" title="The share price divided by the earnings per share." id="price-tooltip" style="color: grey; font-weight: 100;">P/E: </b><b style=""><%= detail.pe_ratio %></b><br>
-		<b data-toggle="tooltip" data-placement="top" title="Latest dividend is dividend per share paid to shareholders in the most recent quarter. Dividend yield is the value of the latest dividend, multiplied by the number of times dividends are typically paid per year, divided by the stock price." id="price-tooltip" style="color: grey; font-weight: 100;">Div/yield: </b><b style=""><%= detail.dividend_yield %></b><br>
-		<b data-toggle="tooltip" data-placement="top" title="The net income over the last four quarters divided by the shares outstanding." id="price-tooltip" style="color: grey; font-weight: 100;">EPS: </b><b style=""><%= detail.eps_estimate_current_year %></b><br>
-		<b data-toggle="tooltip" data-placement="top" title="The number of shares held by investors and company insiders, excluding dilutive securities such as non-vested RSUs and unexercised options." id="price-tooltip" style="color: grey; font-weight: 100;">Shares: </b><b style=""><%= detail.shares_owned %></b>
-
+		<b data-toggle="tooltip" data-placement="top" title="Price range (low - high) in the latest trading day." id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">Range: </b><b style="font-weight: 400; float: right;"><%= detail.days_range %></b><br>
+		<b data-toggle="tooltip" data-placement="top" title="Price range (low - high) in the last 52 weeks." id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">Week52: </b><b style="font-weight: 400; float: right;"><%= detail.weeks_range_52 %></b><br>
+		<b data-toggle="tooltip" data-placement="top" title="Opening price on the latest trading day." id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">Open: </b><b style="font-weight: 400; float: right;"><%= detail.open %></b><br>
+		<b data-toggle="tooltip" data-placement="top" title="The number of shares traded on the latest trading day." id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">Vol: </b><b style="font-weight: 400; float: right;"><%= number_to_human(detail.volume, units: { million: "M" }) %></b><br>
+		<b data-toggle="tooltip" data-placement="top" title="The total value of a company in the stock market. It is generally calculated by multiplying the shares outstanding by the current share price." id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">Mkt cap: </b><b style="font-weight: 400; float: right;"><%= detail.market_capitalization %></b><br>
+		<b data-toggle="tooltip" data-placement="top" title="The share price divided by the earnings per share." id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">P/E: </b><b style="font-weight: 400; float: right;"><%= detail.pe_ratio %></b><br>
+		<b data-toggle="tooltip" data-placement="top" title="Latest dividend is dividend per share paid to shareholders in the most recent quarter. Dividend yield is the value of the latest dividend, multiplied by the number of times dividends are typically paid per year, divided by the stock price." id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">Div/yield: </b><b style="font-weight: 400; float: right;"><%= detail.dividend_yield %></b><br>
+		<b data-toggle="tooltip" data-placement="top" title="The net income over the last four quarters divided by the shares outstanding." id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">EPS: </b><b style="font-weight: 400; float: right;"><%= detail.eps_estimate_current_year %></b><br>
+		<b data-toggle="tooltip" data-placement="top" title="The number of shares held by investors and company insiders, excluding dilutive securities such as non-vested RSUs and unexercised options." id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">Shares: </b><b style="font-weight: 400; float: right;"><%= detail.shares_owned %></b>
+		<hr>
+		<b data-toggle="tooltip" data-placement="top" title="UP: <%= @stock.up %>, NEUTRAL: <%= @stock.neutral %>, DOWN: <%= @stock.down %>" id="price-tooltip" style="color: grey; font-weight: 100; cursor: default;">Expectation</b><br>
 		<div class="progress">
 			<div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= @stock.uppercent %>%">
 				<span class="sr-only"><%= @stock.uppercent %>% UP</span>
@@ -35,15 +33,19 @@
 		</div>
 	</div>
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="padding: 0;">
-		<div>
+			<div style="margin-left: 60px;">Period: 
 			<div class="btn-group" data-toggle="buttons">
+
 				<%= link_to '5d', draw_days_path(:id => @stock.id), remote: true, class: 'btn btn-default', id: 'button-days' %>
 				<%= link_to '1m', draw_month_path(:id => @stock.id), remote: true, class: 'btn btn-default', id: 'button-month' %>
 				<%= link_to '6m', draw_months_path(:id => @stock.id), remote: true, class: 'btn btn-default', id: 'button-months' %>
+				<%= link_to '1y', draw_year_path(:id => @stock.id), remote: true, class: 'btn btn-default', id: 'button-year' %>
+				<%= link_to 'All', draw_all_path(:id => @stock.id), remote: true, class: 'btn btn-default', id: 'button-all' %>
+			</div>
 			</div>
 			<div id="graph-box">
 			</div>
-		</div>
 
 	</div>
 </div>
+<hr>

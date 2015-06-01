@@ -29,7 +29,7 @@ class StocksController < ApplicationController
 
   def show
     @stock = Stock.find(params[:id])
-    
+
   end
 
   def up
@@ -64,6 +64,18 @@ class StocksController < ApplicationController
     end
   end
   def draw_days
+    @stock = Stock.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+  def draw_year
+    @stock = Stock.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+  def draw_all
     @stock = Stock.find(params[:id])
     respond_to do |format|
       format.js

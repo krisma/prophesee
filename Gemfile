@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 # Custom
+gem 'pg', '~>0.18.2'
 gem 'devise', '~> 3.4.0' 
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'will_paginate', '~> 3.0.6'

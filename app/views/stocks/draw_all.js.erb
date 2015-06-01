@@ -1,17 +1,16 @@
-$("#graph-box").replaceWith("<div id=\"graph-box\"><div id=\"chart_div<%= @stock.symbol %>\" style=\"width: 450 px; height: 300px;\"></div></div>");
-// google.load('visualization', '1.0', {'packages':['corechart']});
-document.getElementById("button-days").className += " active";
-document.getElementById("button-months").className = document.getElementById("button-months").className.replace
-      ( /(?:^|\s)active(?!\S)/g , '' )
+$("#graph-box").html("<div id=\"graph-box\"><div id=\"chart_div<%= @stock.symbol %>\" style=\"width: 450 px; height: 300px;\"></div></div>");
+document.getElementById("button-all").className += " active";
 document.getElementById("button-month").className = document.getElementById("button-month").className.replace
+      ( /(?:^|\s)active(?!\S)/g , '' )
+document.getElementById("button-days").className = document.getElementById("button-days").className.replace
       ( /(?:^|\s)active(?!\S)/g , '' )
 document.getElementById("button-year").className = document.getElementById("button-year").className.replace
       ( /(?:^|\s)active(?!\S)/g , '' )
-document.getElementById("button-all").className = document.getElementById("button-all").className.replace
+document.getElementById("button-months").className = document.getElementById("button-months").className.replace
       ( /(?:^|\s)active(?!\S)/g , '' )
 function drawChart() {
 	var data<%= @stock.symbol %> = google.visualization.arrayToDataTable(
-		[<% @stock.last_five.each do |u| %>
+		[<% @stock.last_all.each do |u| %>
 		["<%= u[0] %>", <%= u[1] %>, <%= u[2] %>, <%= u[3] %>, <%= u[4] %>],
 		<% end %>
 		]
