@@ -1,10 +1,10 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <% detail = @stock.get_detail %>
 <div id="stocks-show-stock-symbol">
 	<p><%= @stock.symbol %></p><p style="color: grey;"><%= detail.name %></p>
 </div>
 <hr>
 <div class="row">
-
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
 
@@ -23,18 +23,27 @@
 		<b data-toggle="tooltip" data-placement="top" title="The number of shares held by investors and company insiders, excluding dilutive securities such as non-vested RSUs and unexercised options." id="price-tooltip" style="color: grey; font-weight: 100;">Shares: </b><b style=""><%= detail.shares_owned %></b>
 
 		<div class="progress">
-		  <div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= @stock.uppercent %>%">
-		    <span class="sr-only"><%= @stock.uppercent %>% UP</span>
-		  </div>
-		  <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: <%= @stock.neutralpercent %>%">
-		    <span class="sr-only"><%= @stock.neutralpercent %>% Neutral</span>
-		  </div>
-		  <div class="progress-bar progress-bar-danger progress-bar-striped" style="width: <%= @stock.downpercent %>%">
-		    <span class="sr-only"><%= @stock.downpercent %>% DOWN</span>
-		  </div>
+			<div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= @stock.uppercent %>%">
+				<span class="sr-only"><%= @stock.uppercent %>% UP</span>
+			</div>
+			<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: <%= @stock.neutralpercent %>%">
+				<span class="sr-only"><%= @stock.neutralpercent %>% Neutral</span>
+			</div>
+			<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: <%= @stock.downpercent %>%">
+				<span class="sr-only"><%= @stock.downpercent %>% DOWN</span>
+			</div>
 		</div>
 	</div>
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="padding: 0;">
-		<%= render :partial => 'stocks/graph', :locals => { :stock => @stock } %>
+		<div>
+			<div class="btn-group" data-toggle="buttons">
+				<%= link_to '5d', draw_days_path(:id => @stock.id), remote: true, class: 'btn btn-default', id: 'button-days' %>
+				<%= link_to '1m', draw_month_path(:id => @stock.id), remote: true, class: 'btn btn-default', id: 'button-month' %>
+				<%= link_to '6m', draw_months_path(:id => @stock.id), remote: true, class: 'btn btn-default', id: 'button-months' %>
+			</div>
+			<div id="graph-box">
+			</div>
+		</div>
+
 	</div>
 </div>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
   post 'stocks/watch'
-
+  get 'draw_month' => 'stocks#draw_month'
+  get 'draw_days' => 'stocks#draw_days'
+  get 'draw_months' => 'stocks#draw_months'
   get 'static/index'
   get 'stocks/up'
   get 'stocks/down'

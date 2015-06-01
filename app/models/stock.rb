@@ -54,7 +54,25 @@ class Stock < ActiveRecord::Base
 		return rtn
 	end
 
+	def last_thirty
+		tmp = YahooFinance.historical_quotes(self.symbol,{ start_date: Time::now-(24*60*60*50), end_date: Time::now }).first(30)
+		rtn = []
+		tmp.each do |t|
+			rtn.insert(0, [t.trade_date[5...t.trade_date.size], t.low.to_f, t.open.to_f, t.close.to_f, t.high.to_f])
+		end
+		return rtn
+	end
+
 	def get_detail
 		return YahooFinance.quotes([self.symbol], [:days_range, :weeks_range_52, :open, :volume, :market_capitalization, :pe_ratio, :dividend_yield, :eps_estimate_current_year , :shares_owned, :name])[0]
+	end
+
+	def last_six
+		tmp = YahooFinance.historical_quotes(self.symbol, { start_date: Time::now-(24*60*60*200), end_date: Time::now, period: :monthly }).first(6)
+		rtn = []
+		tmp.each do |t|
+			rtn.insert(0, [t.trade_date[5...t.trade_date.size], t.low.to_f, t.open.to_f, t.close.to_f, t.high.to_f])
+		end
+		return rtn
 	end
 end

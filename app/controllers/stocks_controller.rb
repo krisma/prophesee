@@ -1,5 +1,6 @@
 class StocksController < ApplicationController
   before_action :authenticate_user!, except: [:search]
+  protect_from_forgery :except => :show
   def index
   end
   def search
@@ -28,6 +29,7 @@ class StocksController < ApplicationController
 
   def show
     @stock = Stock.find(params[:id])
+    
   end
 
   def up
@@ -47,5 +49,24 @@ class StocksController < ApplicationController
 	@w.attitude = 0
 	@w.save
 	redirect_to root_path
+  end
+
+  def draw_month
+    @stock = Stock.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+  def draw_months
+    @stock = Stock.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+  def draw_days
+    @stock = Stock.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 end

@@ -14,7 +14,14 @@
     , true);
 
     var options = {
-      legend:'none'
+      legend:'none',
+      series: [
+        {color: 'black', visibleInLegend: false}
+      ],
+      candlestick: {
+        fallingColor: { strokeWidth: 0, fill: 'rgb(217, 83, 79)', stroke: 'rgb(217, 83, 79)' },
+        risingColor: { strokeWidth: 0, fill: 'rgb(92, 184, 92)', stroke: 'rgb(92, 184, 92)' },
+      }
     };
 
     var chart<%= stock.symbol %> = new google.visualization.CandlestickChart(document.getElementById('chart_div<%= stock.symbol %>'));

@@ -20,7 +20,7 @@
 <% @upstocks.each do |up| %>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 	<div class="stock-cell">
-		<p><%= up.symbol %><%= up.close %></p>
+		<p>	<%= link_to up.symbol, up %></p>
 		<p><%= up.close %></p>
 		<div class="progress">
 		  <div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= up.uppercent %>%">

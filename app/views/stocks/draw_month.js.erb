@@ -1,0 +1,32 @@
+$("#graph-box").replaceWith("<div id=\"graph-box\"><div id=\"chart_div<%= @stock.symbol %>\" style=\"width: 450 px; height: 300px;\"></div></div>");
+
+document.getElementById("button-month").className += " active";
+document.getElementById("button-months").className = document.getElementById("button-months").className.replace
+      ( /(?:^|\s)active(?!\S)/g , '' )
+document.getElementById("button-days").className = document.getElementById("button-days").className.replace
+      ( /(?:^|\s)active(?!\S)/g , '' )
+function drawChart() {
+	var data<%= @stock.symbol %> = google.visualization.arrayToDataTable(
+		[<% @stock.last_thirty.each do |u| %>
+		["<%= u[0] %>", <%= u[1] %>, <%= u[2] %>, <%= u[3] %>, <%= u[4] %>],
+		<% end %>
+		]
+      // Treat first row as data as well.
+      , true);
+
+	var options = {
+		legend:'none',
+		series: [
+		{color: 'black', visibleInLegend: false}
+		],
+		candlestick: {
+			fallingColor: { strokeWidth: 0, fill: 'rgb(217, 83, 79)', stroke: 'rgb(217, 83, 79)' },
+			risingColor: { strokeWidth: 0, fill: 'rgb(92, 184, 92)', stroke: 'rgb(92, 184, 92)' },
+		}
+	};
+
+	var chart<%= @stock.symbol %> = new google.visualization.CandlestickChart(document.getElementById('chart_div<%= @stock.symbol %>'));
+
+	chart<%= @stock.symbol %>.draw(data<%= @stock.symbol %>, options);
+}
+drawChart();
