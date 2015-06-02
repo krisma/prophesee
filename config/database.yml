@@ -32,7 +32,10 @@
 #   password: success
 development:
     adapter: postgresql
-    database: postgres://ngifvfwplqhntd:MG9ujLnYBuQ-bVPiBIJ1JVaZno@ec2-54-204-35-248.compute-1.amazonaws.com:5432/dfjq35vocd9akp
+    database: dfjq35vocd9akp
+    host: ec2-54-204-35-248.compute-1.amazonaws.com
     encoding: unicode
-    pool: 5
-    timeout: 5000
+    user: ngifvfwplqhntd 
+    password: MG9ujLnYBuQ-bVPiBIJ1JVaZno
+    port: 5432
+    sslmode: require
