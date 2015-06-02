@@ -3,7 +3,32 @@ class Stock < ActiveRecord::Base
 	has_many :users, through: :watchings
 	before_create :set_random_default
 
-
+	def self.search_online(search)
+		return YahooFinance.quote(search, [:name]).name
+	end
+	def self.init(search)
+		tmp = YahooFinance.quote(search, [:close, :change_and_percent_change, :days_range, :weeks_range_52, :open, :volume, :market_capitalization, :pe_ratio, :dividend_yield, :eps_estimate_current_year , :shares_owned, :name, :stock_exchange, :name, :symbol])
+		symbol = tmp.symbol
+		name = tmp.name
+		close = tmp.close.to_f
+		change = tmp.change_and_percent_change.split[0].to_f
+		percent_change = tmp.change_and_percent_change.split[2].to_f
+		details = { days_range: tmp.days_range, weeks_range_52: tmp.weeks_range_52, open: tmp.open, volume: tmp.volume, market_capitalization: tmp.market_capitalization, pe_ratio: tmp.pe_ratio, dividend_yield: tmp.dividend_yield, eps_estimate_current_year: tmp.eps_estimate_current_year , shares_owned: tmp.shares_owned, stock_exchange: tmp.stock_exchange }
+		details_exp = Time.now.utc + 1.day
+		five_d = YahooFinance.historical_quotes(symbol,{ start_date: Time::now-(24*60*60*10), end_date: Time::now }).first(5)
+		five_d_exp = Time.now.utc + 1.day
+		one_m = YahooFinance.historical_quotes(self.symbol,{ start_date: Time::now-(24*60*60*50), end_date: Time::now }).first(30)
+		one_m_exp = Time.now.utc + 1.day
+		six_m = YahooFinance.historical_quotes(self.symbol, { start_date: Time::now-(24*60*60*200), end_date: Time::now, period: :monthly }).first(6)
+		six_m_exp = Time.now.utc + 1.day
+		one_y = YahooFinance.historical_quotes(self.symbol, { start_date: Time::now-(24*60*60*400), end_date: Time::now, period: :monthly }).first(12)
+		one_y_exp = Time.now.utc + 1.day
+		all = YahooFinance.historical_quotes(self.symbol, { period: :monthly })
+		all_exp = Time.now.utc + 1.day
+		@stock = Stock.create(symbol: tmp.symbol, name: tmp.name, close: close, change: change, percent_change: percent_change, details: details, details_exp: details_exp, five_d: five_d, five_d_exp: five_d_exp, one_m: one_m, one_m_exp: one_m_exp, six_m: six_m, six_m_exp: six_m_exp, one_y: one_y, one_y_exp: one_y_exp, all: all, all_exp: all_exp)
+		@stock.save
+		return @stock
+	end
 
 	def set_default
 		self.up = 0
@@ -46,7 +71,7 @@ class Stock < ActiveRecord::Base
 	end
 
 	def last_five
-		tmp = YahooFinance.historical_quotes(self.symbol,{ start_date: Time::now-(24*60*60*10), end_date: Time::now }).first(5);
+		tmp = YahooFinance.historical_quotes(self.symbol,{ start_date: Time::now-(24*60*60*10), end_date: Time::now }).first(5)
 		rtn = []
 		tmp.each do |t|
 			rtn.insert(0, [t.trade_date[5...t.trade_date.size], t.high.to_f, t.open.to_f, t.close.to_f, t.low.to_f])

@@ -3,9 +3,25 @@ class StocksController < ApplicationController
   protect_from_forgery :except => :show
   def index
   end
+  # def search
+  #   @stock = Stock.find_by_symbol(params[:search])
+  # end
+
   def search
     @stock = Stock.find_by_symbol(params[:search])
+    if @stock
+    else
+      @stock = Stock.find_by_name(params[:search])
+      if @stock
+      else
+        if Stock.search_online(params[:search]) == "N/A"
+          flash[:error] = params[:search].to_s + " not found."
+        else
+          @stock = Stock.init(params[:search])
+      end
+    end
   end
+
   def watch
   	@stock = Stock.find_by_symbol(params[:symbol].to_s.upcase)
   	if @stock
