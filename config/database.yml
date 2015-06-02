@@ -23,10 +23,16 @@
 # production:
 #   <<: *default
 #   database: db/production.sqlite3
+# development:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: template1
+#   pool: 5
+#   username: krisma
+#   password: success
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: template1
-  pool: 5
-  username: krisma
-  password: success
+    adapter: postgresql
+    database: postgres://ngifvfwplqhntd:MG9ujLnYBuQ-bVPiBIJ1JVaZno@ec2-54-204-35-248.compute-1.amazonaws.com:5432/dfjq35vocd9akp
+    encoding: unicode
+    pool: 5
+    timeout: 5000
