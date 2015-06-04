@@ -27,7 +27,7 @@
     text-align: left;
  }
 .total-container {
-    margin-top: 80px;
+    margin-top: 60px;
 }
 #loginbox {
 
@@ -40,16 +40,38 @@
     background-color: #FFF;
     height: 40px;
     width: 80px;
-    margin-top: 10px;
+    margin-top: 0px;
     color: #000;
     border-radius: 0;
 }
+#styled-button-inverse {
+    color: white;
+    border-color: white;
+    border-width: 1px;
+    background-color: transparent;
+    height: 40px;
+    width: 80px;
+    margin-top: 0px;
+    border-radius: 0;
+    outline:none;
+    box-shadow:none;
+}
+
+
+#styled-button-inverse:hover {
+    color: black;
+    background-color: white;
+}
+
+
 #register-container {
     margin-top: 50px;
 }
 #input {
     border-color: black;
     border-width: 1px;
+    outline:none;
+    box-shadow:none;
 }
 #watchbox {
 }
@@ -84,4 +106,70 @@
 }
 #stocks-show-stock-close p {
     font-size: 25px;
+}
+body {
+    background-image: image-url('background.png'); 
+}
+
+#nav-links a {
+    color: white;
+}
+#nav-links a:hover {
+    color: black;
+    background-color: transparent;
+}
+#shared_links a {
+    color: white;
+}
+#shared_links a:hover {
+    color: white;
+    font-weight: 500;
+    background-color: transparent;
+    text-decoration: none;
+}
+#index-left-button {
+    position: absolute;
+    left: 37%;
+    margin-top: 250px;
+    background-color: transparent;
+    color: white;
+    border-color: white;
+    border-width: 1px;
+    background-color: transparent;
+    height: 40px;
+    width: 150px;
+    border-radius: 0;
+    outline:none;
+    box-shadow:none;
+}
+#index-left-button:hover {
+    background-color: white;
+    color: black;
+}
+
+#index-right-button {
+    position: absolute;
+    left: 69%;
+    margin-top: 250px;
+    background-color: transparent;
+    color: white;
+    border-color: white;
+    border-width: 1px;
+    background-color: transparent;
+    height: 40px;
+    width: 150px;
+    border-radius: 0;
+    outline:none;
+    box-shadow:none;
+}
+#index-right-button:hover {
+    background-color: white;
+    color: black;
+}
+
+#index-intro-text {
+    font-size: 35px;
+    color: black;
+    font-weight: 100;
+    
 }

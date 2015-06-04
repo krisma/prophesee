@@ -17,17 +17,29 @@ class Stock < ActiveRecord::Base
 		details_exp = Time.now.utc + 1.day
 		five_d = YahooFinance.historical_quotes(symbol,{ start_date: Time::now-(24*60*60*10), end_date: Time::now }).first(5)
 		five_d_exp = Time.now.utc + 1.day
-		one_m = YahooFinance.historical_quotes(self.symbol,{ start_date: Time::now-(24*60*60*50), end_date: Time::now }).first(30)
+		one_m = YahooFinance.historical_quotes(symbol,{ start_date: Time::now-(24*60*60*50), end_date: Time::now }).first(30)
 		one_m_exp = Time.now.utc + 1.day
-		six_m = YahooFinance.historical_quotes(self.symbol, { start_date: Time::now-(24*60*60*200), end_date: Time::now, period: :monthly }).first(6)
+		six_m = YahooFinance.historical_quotes(symbol, { start_date: Time::now-(24*60*60*200), end_date: Time::now, period: :monthly }).first(6)
 		six_m_exp = Time.now.utc + 1.day
-		one_y = YahooFinance.historical_quotes(self.symbol, { start_date: Time::now-(24*60*60*400), end_date: Time::now, period: :monthly }).first(12)
+		one_y = YahooFinance.historical_quotes(symbol, { start_date: Time::now-(24*60*60*400), end_date: Time::now, period: :monthly }).first(12)
 		one_y_exp = Time.now.utc + 1.day
-		all = YahooFinance.historical_quotes(self.symbol, { period: :monthly })
+		all = YahooFinance.historical_quotes(symbol, { period: :monthly })
 		all_exp = Time.now.utc + 1.day
+		Stock.openstruct_to_hash(five_d)
+		Stock.openstruct_to_hash(one_m)
+		Stock.openstruct_to_hash(six_m)
+		Stock.openstruct_to_hash(one_y)
+		Stock.openstruct_to_hash(all)
 		@stock = Stock.create(symbol: tmp.symbol, name: tmp.name, close: close, change: change, percent_change: percent_change, details: details, details_exp: details_exp, five_d: five_d, five_d_exp: five_d_exp, one_m: one_m, one_m_exp: one_m_exp, six_m: six_m, six_m_exp: six_m_exp, one_y: one_y, one_y_exp: one_y_exp, all: all, all_exp: all_exp)
 		@stock.save
 		return @stock
+	end
+
+	def self.openstruct_to_hash(array_of_openstruct)
+		(0...array_of_openstruct.size).each do |i|
+			array_of_openstruct[i] = array_of_openstruct[i].to_h
+		end
+		return array_of_openstruct
 	end
 
 	def set_default

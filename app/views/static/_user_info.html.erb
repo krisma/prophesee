@@ -6,5 +6,5 @@
 <p><%= current_user.rank %></p>
 <%= button_to "Logout", destroy_user_session_path, :method => :delete, :id => 'styled-button' %> 
 <% else %>
-<%= render 'devise/sessions/new' %>
+<%= render 'devise/registrations/new' %>
 <% end %>

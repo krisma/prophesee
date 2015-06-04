@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<title>Prophesee</title>
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -15,29 +16,32 @@
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
     </script>
+
 </head>
-<body>
+<!-- background-color: rgb(234, 236, 237); -->
+<body 
+
+style="background-position: fixed; background-repeat: no-repeat; background; background-image: <%= @page_tab == "index"? "assets/images/background.png;" : "none;" %>"
+
+>
 	<div class="container">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar navbar-default navbar-fixed-top" style="height: 70px; background-color: rgba(234, 236, 237, 0.3); padding-top: 8px; border-width: 0;">
 			<div class="container">
 				<ul class="nav navbar-nav">
-					<a class="navbar-brand" href="#">Prophesee</a>
-					<li class="<%= @page_tab == "index"? "active" : "" %>"><%= link_to "Dashboard", root_path %></li>
-					<li class="<%= @page_tab == "market"? "active" : "" %>"><%= link_to "Market", market_path %></li>
-					<li class="<%= @page_tab == "community"? "active" : "" %>"><%= link_to "Community", community_path %></li>
+					<li id= "nav-links" class="navbar-brand" style="color: white; font-size: 25px; font-weight: bold;"><%= link_to "Prophesee", root_path %></li>
+					
+					<li id="nav-links" class="<%= @page_tab == "index"? "active" : "" %>"><%= link_to "Dashboard", dashboard_path %></li>
+					<li id="nav-links" class="<%= @page_tab == "market"? "active" : "" %>"><%= link_to "Market", market_path %></li>
+					<li id="nav-links" class="<%= @page_tab == "community"? "active" : "" %>"><%= link_to "Community", community_path %></li>
 				</ul>
+				 <ul class="nav navbar-nav navbar-right">
+        			<li id="nav-links"><%= link_to "Sign in / Sign up", show_sign_path, remote: true %></li>
+        		</ul>
 			</div>
 		</nav>
 		<div class="total-container">
 			<%= render 'layouts/messages' %>
-			<div class="row">
-				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
-					<%= yield %>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
-					<%= render 'static/user_info' %>
-				</div>
-			</div>
+			<%= yield %>
 		</div>
 	</div>
 </body>

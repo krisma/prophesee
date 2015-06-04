@@ -1,0 +1,93 @@
+<% tab "dashboard" %>
+<%= render 'stocks/watch' %>
+<div class="panel panel-default" id="watchbox">
+	<div class="panel-heading">Watchlist</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p>Symbol</p></div>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p>Close</p></div>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p>Change/%</p></div>
+			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><p>History</p></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p>Prediction</p></div>
+			<% current_user.watchlist.each do |w| %>
+			<div class="stock-cell">
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p><%= w.symbol %></p></div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><p><%= w.close %></p></div>
+				<% change = w.change_and_percent_change.split[0] %>
+				<% percent = w.change_and_percent_change.split[2] %>
+				<% if change.to_f > 0 %>
+				<% color_id = "rgb(92, 184, 92)" %>
+				<% elsif change.to_f == 0 %>
+				<% color_id = "black;" %>
+				<% else %>
+				<% color_id = "rgb(217, 83, 79)" %>
+				<% end %>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+					<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="<%= percent %>" id="price-tooltip" style="padding: 0;"><p style="color: <%= color_id %>; margin-top: -2px"><%= change %></p></button>
+				</div>	
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+					<% @s = Stock.find_by_symbol(w.symbol) %>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal<%= @s.symbol %>" id="history-button">
+						<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+					</button>
+				</div>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal<%= @s.symbol %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content" id="stock-modal-width">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">Statistics</h4>
+							</div>
+							<div class="modal-body" id="stock-modal-height">
+								<%= render :partial => 'stocks/graph_days', :locals => { :stock => @s } %>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<% @watching = Watching.find_by(user_id: current_user.id, stock_id: @s.id) %>
+					<div class="btn-group">
+						<button class="btn btn-default btn-sm dropdown-toggle 
+						<% case @watching.attitude %>
+						<% when -1 %>
+						btn-danger
+						<% when 0 %>
+
+						<% when 1 %>
+						btn-success
+						<% end %>
+						" type="button" data-toggle="dropdown" aria-expanded="false" id="attitude-button">
+						<% case @watching.attitude %>
+						<% when -1 %>
+						DOWN
+						<% when 0 %>
+						NEUTRAL
+						<% when 1 %>
+						UP
+						<% end %>
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<% case @watching.attitude %>
+						<% when -1 %>
+						<li><%= link_to "UP", controller: "stocks", action: "up", id: @watching %></li>
+						<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: @watching %></li>
+						<% when 0 %>
+						<li><%= link_to "UP", controller: "stocks", action: "up", id: @watching %></li>
+						<li><%= link_to "DOWN", controller: "stocks", action: "down", id: @watching %></li>
+						<% when 1 %>
+						<li><%= link_to "DOWN", controller: "stocks", action: "down", id: @watching %></li>
+						<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: @watching %></li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>
+</div>
+

@@ -6,12 +6,19 @@ class StaticController < ApplicationController
     @stocks = Stock.all
     @watching = Watching.new
   end
-
+  def dashboard
+  end
 
   def change_nickname
     @user = current_user
   end
 
+  def show_sign
+  end
+  def switch_sign_in
+  end
+  def switch_sign_up
+  end
   def market
     @upstocks = Stock.all.order('up desc')
     @neutralstocks = Stock.all.order('neutral desc')
