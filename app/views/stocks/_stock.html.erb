@@ -1,5 +1,21 @@
 <div class="stock-cell" id="return">
-	<p><%= link_to @stock.symbol, @stock  %><%= @stock.close %></p>
+	<% @stock = stock %>
+	<%= link_to @stock.symbol, @stock, class: "dashboard-modal-symbol" %>
+	<%= link_to "+", watch_path(:id => @stock), method: :post, class: "dashboard-modal-add" %>
+
+	<p class="dashboard-modal-close"><%= @stock.close %></p>
+	<% change = @stock.change %>
+	<% percent = @stock.percent_change %>
+	<% market = @stock.market %>
+	<% if change.to_f > 0 %>
+	<% color_id = "rgb(92, 184, 92)" %>
+	<% elsif change.to_f == 0 %>
+	<% color_id = "black;" %>
+	<% else %>
+	<% color_id = "rgb(217, 83, 79)" %>
+	<% end %>
+
+	<p class="dashboard-modal-change" style="color: <%= color_id %>;"><%= change.to_f.round(2) %></p>
 	<div class="progress" id="short-progress-bar">
 		<div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= @stock.uppercent %>%">
 			<span class="sr-only"><%= @stock.uppercent %>% UP</span>

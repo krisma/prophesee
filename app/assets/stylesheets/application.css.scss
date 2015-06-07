@@ -16,3 +16,11 @@
  
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+/*
+ * Override bootstrap
+ */
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background-color: transparent;
+    color: black!important;
+}

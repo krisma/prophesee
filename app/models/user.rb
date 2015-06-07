@@ -28,12 +28,12 @@ class User < ActiveRecord::Base
   end
 
 
-  def watchlist
+  def get_watchlist
     request = []
     self.stocks.each do |s|
       request << s.symbol
     end
-    response = YahooFinance.quotes(request, [:symbol, :close, :change_and_percent_change])
+    response = YahooFinance.quotes(request, [:symbol, :close, :change_and_percent_change, :stock_exchange])
     return response
   end
 end

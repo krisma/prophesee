@@ -29,6 +29,10 @@
 .total-container {
     margin-top: 60px;
 }
+.lower-total-container {
+    margin-top: 100px;
+
+}
 #loginbox {
 
     margin-right: 80px;
@@ -74,29 +78,21 @@
     box-shadow:none;
 }
 #watchbox {
+    border-radius: 0;
+    height: 600px;
+    border: 0;
 }
 .stock-cell {
-    padding-top: 40px;
 }
-.stock-cell p{
-    font-size: 22px;
-    padding-top: 5px;
-}
+
 #stock-modal-width {
     width: 450px;
 }
 #stock-modal-height {
     height: 250px;
 }
-#attitude-button {
-    width: 90px;
-    border-radius: 0;
-}
-#history-button {
-    background-color: transparent;
-    border-color: black;
-    border-radius: 0;
-}
+
+
 #price-tooltip {
     border-color: transparent;
 }
@@ -107,14 +103,16 @@
 #stocks-show-stock-close p {
     font-size: 25px;
 }
-body {
-    background-image: image-url('background.png'); 
-}
+
 
 #nav-links a {
     color: white;
 }
 #nav-links a:hover {
+    color: black;
+    background-color: transparent;
+}
+#nav-links a:active {
     color: black;
     background-color: transparent;
 }
@@ -172,4 +170,84 @@ body {
     color: black;
     font-weight: 100;
     
+}
+.dashboard-watchlist-symbol {
+    position: absolute;
+    font-size: 40px;
+    color: black;
+    left: 40px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    top: 15px;
+}
+#dashboard-watchlist-symbol:hover {
+    font-size: 30px;
+    background-color: transparent;
+    text-decoration: none;
+}
+.dashboard-watchlist-change {
+    position: absolute;
+    left: 40px;
+    top: 70px;
+    font-size: 35px;
+}
+.dashboard-watchlist-close {
+    position: absolute;
+    left: 180px;
+    top: 30px;
+    font-size: 35px;
+}
+#dashboard-watchlist-history {
+    background-color: transparent;
+    border-color: black;
+    border-radius: 0;
+    position: absolute;
+    left: 170px;
+    top: 65px;
+}
+#dashboard-watchlist-attitude {
+    width: 90px;
+    border-radius: 0;
+    position: absolute;
+    margin-left: 190px;
+    top: 54px
+}
+#dashboard-watchlist-add:hover {
+    background-color: rgba(200, 200, 200, 0.4);
+}
+#dashboard-watchlist-modal {
+    padding: 20px;
+    width: 400px;
+    height: 200px;
+}
+.dashboard-modal-symbol {
+    position: absolute;
+    font-family: 'Josefin Sans', sans-serif;
+    left: 20px;
+    font-size: 25px;
+    top: 80px;
+}
+.dashboard-modal-add {
+    position: absolute;
+    left: 350px;
+    font-size: 20px;
+    top: 80px;
+}
+.dashboard-modal-close {
+    position: absolute;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 25px;
+    left: 100px;
+    top: 88px;
+}
+.dashboard-modal-change {
+    position: absolute;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 25px;
+    left: 180px;
+    top: 88px;
+}
+#short-progress-bar {
+    margin-top: 40px;
+    left: 85px;
 }

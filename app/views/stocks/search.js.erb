@@ -1,6 +1,6 @@
-$("#return").replaceWith("<%=j render @stock %>")
+<% if @stock.nil? %>
+$("#return").replaceWith("Stock not found")
+<% else %>
+$("#return").replaceWith("<%=j render :partial => 'stock', :locals => { :stock => @stock } %>")
+<% end %>
 
-// $('#return').fadeOut('slow').promise().done(function(a) {
-//     $('#return').replaceWith("<%=j render @stock %>");
-//     $(a).slideDown('slow');
-// });

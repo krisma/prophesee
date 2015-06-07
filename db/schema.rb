@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601141913) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-  enable_extension "hstore"
+ActiveRecord::Schema.define(version: 20150527022732) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "content"
@@ -29,15 +25,19 @@ ActiveRecord::Schema.define(version: 20150601141913) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "stocks", force: :cascade do |t|
     t.string   "symbol"
+    t.string   "name"
     t.integer  "up"
     t.integer  "down"
     t.integer  "neutral"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float    "close"
+    t.float    "change"
+    t.float    "percent_change"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 20150601141913) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "watchings", force: :cascade do |t|
     t.integer  "user_id"
@@ -71,8 +71,7 @@ ActiveRecord::Schema.define(version: 20150601141913) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "watchings", ["stock_id"], name: "index_watchings_on_stock_id", using: :btree
-  add_index "watchings", ["user_id"], name: "index_watchings_on_user_id", using: :btree
+  add_index "watchings", ["stock_id"], name: "index_watchings_on_stock_id"
+  add_index "watchings", ["user_id"], name: "index_watchings_on_user_id"
 
-  add_foreign_key "posts", "users"
 end

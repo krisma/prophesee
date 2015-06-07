@@ -1,5 +1,5 @@
 class StaticController < ApplicationController
-  before_action :authenticate_user!, only: [:change_nickname]
+  before_action :authenticate_user!, only: [:change_nickname, :dashboard]
   def index
   	@posts = Post.all
   	@post = user_signed_in?? current_user.posts.new : Post.new
@@ -20,9 +20,7 @@ class StaticController < ApplicationController
   def switch_sign_up
   end
   def market
-    @upstocks = Stock.all.order('up desc')
-    @neutralstocks = Stock.all.order('neutral desc')
-    @downstocks = Stock.all.order('down desc')
+    @popular = (Stock.all.sort_by { |stock| stock.users.count }).first(10)
   end
 
   def resource_name

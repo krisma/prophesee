@@ -1,41 +1,35 @@
 # SQLite version 3.x
 #   gem install sqlite3
-#
+
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
-#
-# default: &default
-#   adapter: sqlite3
-#   pool: 5
-#   timeout: 5000
 
-# development:
-#   <<: *default
-#   database: db/development.sqlite3
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
 
-# # Warning: The database defined as "test" will be erased and
-# # re-generated from your development database when you run "rake".
-# # Do not set this db to the same as development or production.
-# test:
-#   <<: *default
-#   database: db/test.sqlite3
-
-# production:
-#   <<: *default
-#   database: db/production.sqlite3
-# development:
-#   adapter: postgresql
-#   encoding: unicode
-#   database: template1
-#   pool: 5
-#   username: krisma
-#   password: success
 development:
-    adapter: postgresql
-    database: dfjq35vocd9akp
-    host: ec2-54-204-35-248.compute-1.amazonaws.com
-    encoding: unicode
-    user: ngifvfwplqhntd 
-    password: MG9ujLnYBuQ-bVPiBIJ1JVaZno
-    port: 5432
-    sslmode: require
+  <<: *default
+  database: db/development.sqlite3
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  <<: *default
+  database: db/production.sqlite3
+
+# development:
+#     adapter: postgresql
+#     database: dfjq35vocd9akp
+#     host: ec2-54-204-35-248.compute-1.amazonaws.com
+#     encoding: unicode
+#     user: ngifvfwplqhntd 
+#     password: MG9ujLnYBuQ-bVPiBIJ1JVaZno
+#     port: 5432
+#     sslmode: require
