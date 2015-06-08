@@ -4,16 +4,8 @@ class StocksController < ApplicationController
   def index
   end
   def search
-    @stock = Stock.find_by_symbol(params[:search])
-    if @stock.nil?
-      @stock = Stock.find_by_name(params[:search])
-      if @stock.nil?
-        if Stock.search_online(params["search"]) == "N/A"
-        else
-          @stock = Stock.init(params[:search])
-        end
-      end
-    end
+    @stock = Stock.search_brief(params[:search])
+
   end
 
   # def search
@@ -53,23 +45,23 @@ class StocksController < ApplicationController
 end
 
 def watch
-    @stock = Stock.find(params[:id])
-    if @stock
-      if current_user.watching?(@stock.symbol)
-        flash[:error] = @stock.symbol + " is on watchlist."
-      else
-       @watching = Watching.new
-       @watching.changeable = true
-       @watching.attitude = 0
-       @watching.save
-       @stock.watchings << @watching
-       current_user.watchings << @watching
-       flash[:notice] = @stock.symbol + " added."
-     end
-   else
-    flash[:error] = params[:symbol].to_s + " not found."
-  end
-  redirect_to dashboard_path
+  @stock = Stock.find(params[:id])
+  if @stock
+    if current_user.watching?(@stock.symbol)
+      flash[:error] = @stock.symbol + " is on watchlist."
+    else
+     @watching = Watching.new
+     @watching.changeable = true
+     @watching.attitude = 0
+     @watching.save
+     @stock.watchings << @watching
+     current_user.watchings << @watching
+     flash[:notice] = @stock.symbol + " added."
+   end
+ else
+  flash[:error] = params[:symbol].to_s + " not found."
+end
+redirect_to dashboard_path
 end
 
 def show

@@ -5,78 +5,8 @@
 			<div class="panel-heading text-center" style="font-family: 'Poiret One', cursive; font-size: 30px;">Watchlist</div>
 			<div class="panel-body">
 				<div class="row">
-					<% current_user.get_watchlist.each do |stock| %>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 120px; min-width: 250px;">
-						<% @s = Stock.find_by_symbol(stock.symbol) %>
-						<%= link_to stock.symbol, @s, class: 'dashboard-watchlist-symbol' %>
-						<p class='dashboard-watchlist-close'><%= stock.close.to_f.round(2) %></p>
-						
-						<% change = stock.change_and_percent_change.split[0] %>
-						<% percent = stock.change_and_percent_change.split[2] %>
-						<% market = stock.market %>
-						<% if change.to_f > 0 %>
-						<% color_id = "rgb(92, 184, 92)" %>
-						<% elsif change.to_f == 0 %>
-						<% color_id = "black;" %>
-						<% else %>
-						<% color_id = "rgb(217, 83, 79)" %>
-						<% end %>
-
-						<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="<%= percent.to_f.round(2) %>" id="price-tooltip" style="padding: 0;"><p class="dashboard-watchlist-change" style="color: <%= color_id %>; margin-top: -2px"><%= change.to_f.round(2) %></p></button>
-						<button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal<%= @s.symbol %>" id="dashboard-watchlist-history">
-							<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-						</button>
-						<div class="modal fade" id="myModal<%= @s.symbol %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content" id="stock-modal-width">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title" id="myModalLabel">Statistics</h4>
-									</div>
-									<div class="modal-body" id="stock-modal-height">
-										<%= render :partial => 'stocks/graph_days', :locals => { :stock => @s } %>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<% @watching = Watching.find_by(user_id: current_user.id, stock_id: @s.id) %>
-						<div class="btn-group">
-							<button class="btn btn-default btn-sm dropdown-toggle 
-							<% case @watching.attitude %>
-							<% when -1 %>
-							btn-danger
-							<% when 0 %>
-
-							<% when 1 %>
-							btn-success
-							<% end %>
-							" type="button" data-toggle="dropdown" aria-expanded="false" id="dashboard-watchlist-attitude">
-							<% case @watching.attitude %>
-							<% when -1 %>
-							DOWN
-							<% when 0 %>
-							NEUTRAL
-							<% when 1 %>
-							UP
-							<% end %>
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<% case @watching.attitude %>
-							<% when -1 %>
-							<li><%= link_to "UP", controller: "stocks", action: "up", id: @watching %></li>
-							<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: @watching %></li>
-							<% when 0 %>
-							<li><%= link_to "UP", controller: "stocks", action: "up", id: @watching %></li>
-							<li><%= link_to "DOWN", controller: "stocks", action: "down", id: @watching %></li>
-							<% when 1 %>
-							<li><%= link_to "DOWN", controller: "stocks", action: "down", id: @watching %></li>
-							<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: @watching %></li>
-							<% end %>
-						</ul>
-					</div>
-				</div>
+				<% current_user.stocks.each do |stock| %>
+					<%= render :partial => 'stocks/brief', :locals => { :stock => stock } %>	
 				<% end %>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 120px; min-width: 250px; padding: 20px;">
 					<div style="border-style: dashed; border-width: 2px; border-color: grey; width: 275px; height: 80px;" type="button" data-toggle="modal" data-target=".addmodal" id="dashboard-watchlist-add">

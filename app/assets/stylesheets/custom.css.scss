@@ -175,7 +175,7 @@
     position: absolute;
     font-size: 40px;
     color: black;
-    left: 40px;
+
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 300;
     top: 15px;
@@ -187,13 +187,13 @@
 }
 .dashboard-watchlist-change {
     position: absolute;
-    left: 40px;
+
     top: 70px;
     font-size: 35px;
 }
 .dashboard-watchlist-close {
     position: absolute;
-    left: 180px;
+    left: 140px;
     top: 30px;
     font-size: 35px;
 }
@@ -202,14 +202,14 @@
     border-color: black;
     border-radius: 0;
     position: absolute;
-    left: 170px;
+    left: 130px;
     top: 65px;
 }
 #dashboard-watchlist-attitude {
     width: 90px;
     border-radius: 0;
     position: absolute;
-    margin-left: 190px;
+    margin-left: 150px;
     top: 54px
 }
 #dashboard-watchlist-add:hover {

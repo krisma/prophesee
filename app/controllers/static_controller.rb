@@ -20,7 +20,13 @@ class StaticController < ApplicationController
   def switch_sign_up
   end
   def market
-    @popular = (Stock.all.sort_by { |stock| stock.users.count }).first(10)
+    @popular = $redis.get("popular")
+    if @popular.nil?
+      @popular = (Stock.all.sort_by { |stock| stock.users.count }).first(10)
+
+    else
+      @popular = JSON.parse(@popular)
+    end
   end
 
   def resource_name

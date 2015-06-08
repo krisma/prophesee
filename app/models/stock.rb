@@ -47,6 +47,33 @@ class Stock < ActiveRecord::Base
 	# 	return array_of_openstruct
 	# end
 
+	def brief
+		tmp = $redis.get(self.symbol)
+		if tmp.nil?
+			tmp = YahooFinance.quote(self.symbol, [:close, :change_and_percent_change, :stock_exchange])
+			tmp[:up] = self.up
+			tmp[:neutral] = self.neutral
+			tmp[:down] = self.down
+			tmp[:id] = self.id
+			$redis.set(self.symbol, tmp.to_json)
+			return tmp.to_h
+		else
+			return JSON.parse(tmp).to_h
+		end
+	end
+
+	def self.search_brief(search)
+		@stock = Stock.find_by_symbol(search)
+		if @stock.nil?
+			@stock = Stock.find_by_name(search)
+			if @stock.nil?
+				@stock = Stock.init(search)
+			end
+		end
+		return @stock
+	end
+
+
 	def set_default
 		self.up = 0
 		self.down = 0

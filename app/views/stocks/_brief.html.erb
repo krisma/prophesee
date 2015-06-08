@@ -1,0 +1,57 @@
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 120px; min-width: 250px; left: 15px;">
+		<% data = stock.brief["table"] %>
+		<% data = stock.brief["table"] unless data %>
+
+		<%= link_to stock.symbol, stock, class: 'dashboard-watchlist-symbol' %>
+		<p class='dashboard-watchlist-close'><%= data["close"].to_f.round(2) %></p>
+		
+		<% change = data["change_and_percent_change"].split[0].to_f.round(2) %>
+		<% percent = data["change_and_percent_change"].split[2].to_f.round(2) %>
+		<% market = data["market"] %>
+		<% if change.to_f > 0 %>
+		<% color_id = "rgb(92, 184, 92)" %>
+		<% elsif change.to_f == 0 %>
+		<% color_id = "black;" %>
+		<% else %>
+		<% color_id = "rgb(217, 83, 79)" %>
+		<% end %>
+
+		<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="<%= percent.to_f.round(2) %>" id="price-tooltip" style="padding: 0;"><p class="dashboard-watchlist-change" style="color: <%= color_id %>; margin-top: -2px"><%= change.to_f.round(2) %></p></button>
+		
+		<% @watching = Watching.find_by(user_id: current_user.id, stock_id: stock) %>
+		<div class="btn-group">
+			<button class="btn btn-default btn-sm dropdown-toggle 
+			<% case @watching.attitude %>
+			<% when -1 %>
+			btn-danger
+			<% when 0 %>
+
+			<% when 1 %>
+			btn-success
+			<% end %>
+			" type="button" data-toggle="dropdown" aria-expanded="false" id="dashboard-watchlist-attitude">
+			<% case @watching.attitude %>
+			<% when -1 %>
+			DOWN
+			<% when 0 %>
+			NEUTRAL
+			<% when 1 %>
+			UP
+			<% end %>
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<% case @watching.attitude %>
+			<% when -1 %>
+			<li><%= link_to "UP", controller: "stocks", action: "up", id: @watching %></li>
+			<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: @watching %></li>
+			<% when 0 %>
+			<li><%= link_to "UP", controller: "stocks", action: "up", id: @watching %></li>
+			<li><%= link_to "DOWN", controller: "stocks", action: "down", id: @watching %></li>
+			<% when 1 %>
+			<li><%= link_to "DOWN", controller: "stocks", action: "down", id: @watching %></li>
+			<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: @watching %></li>
+			<% end %>
+		</ul>
+	</div>
+</div>

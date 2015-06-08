@@ -21,10 +21,11 @@
 					</div>
 				</div>
 			</div>
+			<p>Popular stocks</p>
 			<% @popular.each do |stock| %>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-				<%= stock.symbol %>
-			</div>	
+
+				<%= render :partial => 'stocks/brief', :locals => { :stock => stock } %>
+
 			<% end %>
 		</div>
 	</div>

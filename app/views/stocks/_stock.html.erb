@@ -1,12 +1,13 @@
 <div class="stock-cell" id="return">
-	<% @stock = stock %>
+	<% data = @stock.brief["table"] %>
+	<% data = @stock.brief["table"] unless data %>
 	<%= link_to @stock.symbol, @stock, class: "dashboard-modal-symbol" %>
-	<%= link_to "+", watch_path(:id => @stock), method: :post, class: "dashboard-modal-add" %>
+	<%= link_to "+", watch_path(:id => data["id"]), method: :post, class: "dashboard-modal-add" %>
 
-	<p class="dashboard-modal-close"><%= @stock.close %></p>
-	<% change = @stock.change %>
-	<% percent = @stock.percent_change %>
-	<% market = @stock.market %>
+	<p class="dashboard-modal-close"><%= data["close"].to_f.round(2) %></p>
+	<% change = data["change_and_percent_change"].split[0].to_f.round(2)%>
+	<% percent = data["change_and_percent_change"].split[2].to_f.round(2) %>
+	<% market = data["market"] %>
 	<% if change.to_f > 0 %>
 	<% color_id = "rgb(92, 184, 92)" %>
 	<% elsif change.to_f == 0 %>
@@ -14,17 +15,20 @@
 	<% else %>
 	<% color_id = "rgb(217, 83, 79)" %>
 	<% end %>
-
+	<% total = data["up"] + data["neutral"] + data["down"] %>
+	<% uppercent = data["up"].to_f / total * 100 %>
+	<% neutralpercent = data["neutral"].to_f / total * 100 %>
+	<% downpercent = data["down"].to_f / total * 100 %>
 	<p class="dashboard-modal-change" style="color: <%= color_id %>;"><%= change.to_f.round(2) %></p>
 	<div class="progress" id="short-progress-bar">
-		<div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= @stock.uppercent %>%">
-			<span class="sr-only"><%= @stock.uppercent %>% UP</span>
+		<div class="progress-bar progress-bar-success progress-bar-striped" style="width: <%= uppercent %>%">
+			<span class="sr-only"><%= uppercent %>% UP</span>
 		</div>
-		<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: <%= @stock.neutralpercent %>%">
-			<span class="sr-only"><%= @stock.neutralpercent %>% Neutral</span>
+		<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: <%= neutralpercent %>%">
+			<span class="sr-only"><%= neutralpercent %>% Neutral</span>
 		</div>
-		<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: <%= @stock.downpercent %>%">
-			<span class="sr-only"><%= @stock.downpercent %>% DOWN</span>
+		<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: <%= downpercent %>%">
+			<span class="sr-only"><%= downpercent %>% DOWN</span>
 		</div>
 	</div>
 </div>
