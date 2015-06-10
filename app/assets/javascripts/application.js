@@ -15,3 +15,25 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+(function ($) {
+  $(document).ready(function(){
+    
+	// hide .navbar first
+	$("#nav1").hide();
+	
+	// fade in .navbar
+	$(function () {
+		$(window).scroll(function () {
+            // set distance user needs to scroll before we fadeIn navbar
+			if ($(this).scrollTop() > 542) {
+				$('#nav1').fadeIn();
+			} else {
+				$('#nav1').fadeOut();
+			}
+		});
+
+	
+	});
+
+});
+}(jQuery));

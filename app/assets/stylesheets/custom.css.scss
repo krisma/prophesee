@@ -79,7 +79,6 @@
 }
 #watchbox {
     border-radius: 0;
-    height: 600px;
     border: 0;
 }
 .stock-cell {
@@ -168,9 +167,13 @@
 #index-intro-text {
     font-size: 35px;
     color: black;
-    font-weight: 100;
-    
+    font-weight: 100;   
 }
+#index-intro-text-1 {
+    font-size: 25px;
+}
+
+
 .dashboard-watchlist-symbol {
     position: absolute;
     font-size: 40px;
@@ -189,13 +192,13 @@
     position: absolute;
 
     top: 70px;
-    font-size: 35px;
+    font-size: 25px;
 }
 .dashboard-watchlist-close {
     position: absolute;
     left: 140px;
     top: 30px;
-    font-size: 35px;
+    font-size: 32.5px;
 }
 #dashboard-watchlist-history {
     background-color: transparent;
@@ -210,7 +213,29 @@
     border-radius: 0;
     position: absolute;
     margin-left: 150px;
-    top: 54px
+    top: 96px
+}
+#dashboard-watchlist-distribution {
+    height: 7px;
+    margin-top: 78px;
+    width: 241px;
+    border-radius: 0;
+}
+#dashboard-watchlist-distribution-number {
+    height: 20px;
+    position: absolute;
+    top: 110px;
+    width: 150px;
+    line-height: 1px;
+}
+
+#dashboard-watchlist-distribution-number p {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 10px;
+}
+#dashboard-watchlist-add {
+    cursor: pointer;
 }
 #dashboard-watchlist-add:hover {
     background-color: rgba(200, 200, 200, 0.4);
@@ -250,4 +275,9 @@
 #short-progress-bar {
     margin-top: 40px;
     left: 85px;
+}
+
+.nav-dropdown-box {
+    width: 300px;
+    height: 400px;
 }

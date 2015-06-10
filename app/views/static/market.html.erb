@@ -17,12 +17,11 @@
 						<div id="return">
 							<p>Enter symbols like "AAPL" or company names like "Apple Inc."</p>
 						</div>
-
 					</div>
 				</div>
 			</div>
 			<p>Popular stocks</p>
-			<% @popular.each do |stock| %>
+			<% @stocks.each do |stock| %>
 
 				<%= render :partial => 'stocks/brief', :locals => { :stock => stock } %>
 

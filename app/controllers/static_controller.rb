@@ -20,14 +20,38 @@ class StaticController < ApplicationController
   def switch_sign_up
   end
   def market
-    @popular = $redis.get("popular")
-    if @popular.nil?
-      @popular = (Stock.all.sort_by { |stock| stock.users.count }).first(10)
-
+    tmp = $redis.get("cache-popular")
+    if tmp.nil?
+      @stocks = (Stock.all.sort_by { |stock| stock.users.count }).first(10)
+      requests = []
+      @stocks.each do |s|
+        requests << s.id
+      end
+      $redis.set("cache-popular", requests.to_json)
     else
-      @popular = JSON.parse(@popular)
+      data = JSON.parse(tmp)
+      @stocks = []
+      data.each do |d|
+        @stocks << Stock.find(d)
+      end
     end
   end
+
+  def brief
+    tmp = $redis.get(self.symbol)
+    if tmp.nil?
+      tmp = YahooFinance.quote(self.symbol, [:close, :change_and_percent_change, :stock_exchange])
+      tmp[:up] = self.up
+      tmp[:neutral] = self.neutral
+      tmp[:down] = self.down
+      tmp[:id] = self.id
+      $redis.set(self.symbol, tmp.to_json)
+      return tmp.to_h
+    else
+      return JSON.parse(tmp).to_h
+    end
+  end
+
 
   def resource_name
     :user

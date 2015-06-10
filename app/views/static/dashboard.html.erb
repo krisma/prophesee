@@ -8,9 +8,9 @@
 				<% current_user.stocks.each do |stock| %>
 					<%= render :partial => 'stocks/brief', :locals => { :stock => stock } %>	
 				<% end %>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 120px; min-width: 250px; padding: 20px;">
-					<div style="border-style: dashed; border-width: 2px; border-color: grey; width: 275px; height: 80px;" type="button" data-toggle="modal" data-target=".addmodal" id="dashboard-watchlist-add">
-						<p class="text-center" style="font-size: 20px; margin-top: 27.5px; cursor: default;">+ ADD</p>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 150px; min-width: 250px; padding: 20px; margin-bottom: 10px;">
+					<div style="border-style: dashed; border-width: 2px; border-color: grey; width: 260px; height: 120px;" type="button" data-toggle="modal" data-target=".addmodal" id="dashboard-watchlist-add">
+						<p class="text-center" style="font-size: 20px; margin-top: 50px; cursor: pointer;">+ ADD</p>
 					</div>
 				</div>
 

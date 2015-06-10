@@ -64,6 +64,22 @@ end
 redirect_to dashboard_path
 end
 
+def unwatch
+  @stock = Stock.find(params[:id])
+  if @stock
+    if current_user.watching?(@stock.symbol)
+      @watching = Watching.find_by(user_id: current_user.id, stock_id: @stock)
+      @watching.delete
+      flash[:notice] = @stock.symbol + " is removed from watchlist."
+    else
+       flash[:error] = @stock.symbol + " is not on watchlist."
+   end
+  else
+    flash[:error] = params[:symbol].to_s + " not found."
+end
+redirect_to dashboard_path
+end
+
 def show
   @stock = Stock.find(params[:id])
 
@@ -73,19 +89,19 @@ def up
 	@w = Watching.find_by(id: params[:id])
 	@w.attitude = 1
 	@w.save
-	redirect_to root_path
+	redirect_to dashboard_path
 end
 def down
   @w = Watching.find_by(id: params[:id])
   @w.attitude = -1
   @w.save
-  redirect_to root_path
+  redirect_to dashboard_path
 end
 def neutral
   @w = Watching.find_by(id: params[:id])
   @w.attitude = 0
   @w.save
-  redirect_to root_path
+  redirect_to dashboard_path
 end
 
 def draw_month

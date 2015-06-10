@@ -38,4 +38,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  ENV['COLOR_UP'] = "#5cb85c"
+  ENV['COLOR_NEUTRAL'] = "#f0ad4e"
+  ENV['COLOR_DOWN'] = "#d9534f"
 end
