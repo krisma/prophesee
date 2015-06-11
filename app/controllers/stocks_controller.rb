@@ -1,6 +1,17 @@
 class StocksController < ApplicationController
-  before_action :authenticate_user!, except: [:search]
+  before_action :authenticate_user!, except: [:search, :show, :draw_days, :draw_month, :draw_months, :draw_year, :draw_all]
   protect_from_forgery :except => :show
+
+  layout :runtime_layout
+
+  def runtime_layout
+    if user_signed_in?
+      'only_dashboard'
+    else
+      'except_dashboard'
+    end
+  end
+
   def index
   end
   def search

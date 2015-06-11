@@ -41,4 +41,21 @@ Rails.application.configure do
   ENV['COLOR_UP'] = "#5cb85c"
   ENV['COLOR_NEUTRAL'] = "#f0ad4e"
   ENV['COLOR_DOWN'] = "#d9534f"
+  ENV['S3_BUCKET_NAME'] = "prophesee"
+  ENV['AWS_ACCESS_KEY_ID'] = "AKIAJQ7U7JXU6XSRPAWQ"
+  ENV['AWS_SECRET_ACCESS_KEY'] = "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"
+  ENV['USER_RATING_DEFAULT'] = (2.0).to_s
+
+
+
+
+  Paperclip.options[:command_path] = "/usr/local/bin/"
+  config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_credentials => {
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  }
+}
 end

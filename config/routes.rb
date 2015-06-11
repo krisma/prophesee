@@ -13,10 +13,12 @@ Rails.application.routes.draw do
   get 'stocks/neutral'
   root:to => "static#index"
   get 'market' => 'static#market'
+  get 'setting' => "static#setting"
   get 'community' => 'static#community'
   get 'dashboard' => 'static#dashboard'
   get 'show_sign' => 'static#show_sign'
   post 'search' => 'stocks#search'
+  post 'avatar' => 'static#change_avatar'
   get 'switch_sign_in' => 'static#switch_sign_in'
   get 'switch_sign_up' => 'static#switch_sign_up'
   resources :posts

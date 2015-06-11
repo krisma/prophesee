@@ -12,8 +12,14 @@ gem 'redis'
 gem 'redis-namespace'
 gem 'redis-rails'
 gem 'redis-rack-cache'
-# End
+# End Redis
 
+# Paperclip
+gem 'paperclip', "~> 4.2"
+gem 'aws-sdk', '< 2.0'
+# End Paperclip
+
+# End Custom
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record

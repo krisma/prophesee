@@ -32,8 +32,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       ## Custom info
       t.string :nickname
-      t.float :rank
-      t.string :photo
+      t.float :rating
       t.integer :quota
 
       

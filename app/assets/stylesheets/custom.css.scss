@@ -80,6 +80,8 @@
 #watchbox {
     border-radius: 0;
     border: 0;
+    height: 758px;
+    box-shadow: none;
 }
 .stock-cell {
 }
@@ -106,6 +108,7 @@
 
 #nav-links a {
     color: white;
+    background-color: transparent;
 }
 #nav-links a:hover {
     color: black;
@@ -127,7 +130,7 @@
 #index-left-button {
     position: absolute;
     left: 37%;
-    margin-top: 250px;
+    margin-top: 260px;
     background-color: transparent;
     color: white;
     border-color: white;
@@ -147,7 +150,7 @@
 #index-right-button {
     position: absolute;
     left: 69%;
-    margin-top: 250px;
+    margin-top: 260px;
     background-color: transparent;
     color: white;
     border-color: white;
@@ -167,7 +170,8 @@
 #index-intro-text {
     font-size: 35px;
     color: black;
-    font-weight: 100;   
+    font-weight: 100;  
+    font-family: 'Josefin Sans', sans-serif;
 }
 #index-intro-text-1 {
     font-size: 25px;
@@ -212,7 +216,7 @@
     width: 90px;
     border-radius: 0;
     position: absolute;
-    margin-left: 150px;
+    margin-left: 151px;
     top: 96px
 }
 #dashboard-watchlist-distribution {
@@ -280,4 +284,46 @@
 .nav-dropdown-box {
     width: 300px;
     height: 400px;
+    padding: 25px;
+}
+.circle{width:100px;height:100px;border-radius:50px;font-size:20px;color:#fff;line-height:100px;text-align:center;background:transparent;}
+
+#dropdown-setting a {
+    color: black;
+}
+#dashboard-left-nav-links {
+    color: #9da8ba;
+    background-color: transparent;
+    border-width: 0;
+    height: 100%;
+    width: 100%;
+    padding-top: 19px;
+    padding-left: 20px;
+    text-align: left;
+}
+#dashboard-left-nav-links-active {
+    color: white;
+    background-color: transparent;
+    border-width: 0;
+    height: 100%;
+    width: 100%;
+    padding-top: 19px;
+    padding-left: 20px;
+    text-align: left;
+}
+.dashboard-left-nav-tabs {
+
+    height: 60px;
+    border-left-width: 5px;
+    border-left-color: transparent;
+    border-left-style: solid;
+
+}
+.dashboard-left-nav-tabs-active {
+    background-color: #30394a;
+    height: 60px;
+    border-left-width: 5px;
+    border-left-color: rgb(50, 200, 50);
+    border-left-style: solid;
+
 }

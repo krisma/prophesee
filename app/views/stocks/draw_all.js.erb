@@ -1,4 +1,4 @@
-$("#graph-box").html("<div id=\"graph-box\"><div id=\"chart_div<%= @stock.symbol %>\" style=\"width: 450 px; height: 300px;\"></div></div>");
+$("#graph-box").html("<div id=\"graph-box\"><div id=\"chart_div<%= @stock.symbol %>\" style=\"width: 450px; height: 300px;\"></div></div>");
 document.getElementById("button-all").className += " active";
 document.getElementById("button-month").className = document.getElementById("button-month").className.replace
       ( /(?:^|\s)active(?!\S)/g , '' )

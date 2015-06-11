@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300' rel='stylesheet' type='text/css'>
+	<title>Prophesee</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<script type="text/javascript">
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+
+	</script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+    </script>
+</head>
+<body 
+style="
+<% case @page_tab  %>
+<% when "index" %>
+background:url(<%= image_path('background.png') %>) no-repeat;
+<% when "dashboard" %>
+background:url(<%= image_path('old_mathematics.png') %>);
+<% end %>
+">
+<div class="container">
+<div class="row">
+	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="background-color: #354051; height: 758px;">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 30px;">
+				<%= image_tag current_user.avatar.url(:thumb), class: "circle" %>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 20px; height: 50px; border-bottom-color: #2e3748; border-bottom-width: 2px; border-bottom-style: solid;">
+				<p style="color: white;"><%= current_user.nickname %></p>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 30px; padding: 0;">
+				<div class="
+				<% if @page_tab == "dashboard" %>
+				dashboard-left-nav-tabs-active
+				<% else %>
+				dashboard-left-nav-tabs
+				<% end %>
+				">
+					<% dashboard_id = (@page_tab == "dashboard")? "dashboard-left-nav-links-active" : "dashboard-left-nav-links"  %>
+					<% dashboard_img = (@page_tab == "dashboard")? "glyphicons-332-dashboard 2.png" : "glyphicons-332-dashboard.png"  %>
+					<%= link_to dashboard_path, :id => dashboard_id, :class => "btn" do %>
+					<%= image_tag(dashboard_img, style: "width: 24px; margin-right: 10px;") %> DASHBOARD
+					<% end %>
+				</div>
+				<div class="
+				<% if @page_tab == "market" %>
+				dashboard-left-nav-tabs-active
+				<% else %>
+				dashboard-left-nav-tabs
+				<% end %>
+				">
+					<% market_id = (@page_tab == "market")? "dashboard-left-nav-links-active" : "dashboard-left-nav-links"  %>
+					<% market_img = (@page_tab == "market")? "glyphicons-41-stats 2.png" : "glyphicons-41-stats.png"  %>
+					<%= link_to market_path, :id => market_id, :class => "btn" do %>
+					<%= image_tag(market_img, style: "width: 24px; margin-right: 10px;") %> MARKET
+					<% end %>
+				</div>
+				<div class="
+				<% if @page_tab == "community" %>
+				dashboard-left-nav-tabs-active
+				<% else %>
+				dashboard-left-nav-tabs
+				<% end %>
+				">
+					<% community_id = (@page_tab == "community")? "dashboard-left-nav-links-active" : "dashboard-left-nav-links"  %>
+					<% community_img = (@page_tab == "community")? "glyphicons-44-group 2.png" : "glyphicons-44-group.png"  %>
+					<%= link_to community_path, :id => community_id, :class => "btn" do %>
+					<%= image_tag(community_img, style: "width: 24px; margin-right: 10px;") %> COMMUNITY
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-left: 0;">
+		<div class="panel panel-default" id="watchbox">
+			<div class="panel-heading text-center" style="font-family: 'Poiret One', cursive; font-size: 30px;">
+				<% if @page_tab == "show" %>
+				Detail
+				<% else %>
+				<%= @page_tab.capitalize %>
+				<% end %>
+
+			</div>
+			<div class="panel-body">
+			<%= yield %>
+			</div>	
+		</div>
+
+	</div>
+
+</div>
+</div>
+</body>

@@ -1,42 +1,31 @@
 <% tab "dashboard" %>
 <div class="row">
-	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<div class="panel panel-default" id="watchbox">
-			<div class="panel-heading text-center" style="font-family: 'Poiret One', cursive; font-size: 30px;">Watchlist</div>
-			<div class="panel-body">
-				<div class="row">
-				<% current_user.stocks.each do |stock| %>
-					<%= render :partial => 'stocks/brief', :locals => { :stock => stock } %>	
+	<% current_user.stocks.each do |stock| %>
+	<%= render :partial => 'stocks/brief', :locals => { :stock => stock } %>	
+	<% end %>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 150px; min-width: 250px; padding: 20px; margin-bottom: 10px; left: 30px;">
+		<div style="border-style: dashed; border-width: 2px; border-color: grey; width: 260px; height: 120px;" type="button" data-toggle="modal" data-target=".addmodal" id="dashboard-watchlist-add">
+			<p class="text-center" style="font-size: 20px; margin-top: 50px; cursor: pointer;">+ ADD</p>
+		</div>
+	</div>
+
+
+	<div class="modal fade addmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="dashboard-watchlist-modal">
+				<%= form_tag('/search', remote: true, id: 'search-form', class: 'input-group') do %>
+				<%= text_field_tag :search, params[:search], id: 'search-box', class: 'form-control' %>
+				<span class="input-group-btn">
+					<%= button_tag(type: "submit", class: "btn btn-default") do %>
+					Search
+					<% end %>
+				</span>
 				<% end %>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 150px; min-width: 250px; padding: 20px; margin-bottom: 10px;">
-					<div style="border-style: dashed; border-width: 2px; border-color: grey; width: 260px; height: 120px;" type="button" data-toggle="modal" data-target=".addmodal" id="dashboard-watchlist-add">
-						<p class="text-center" style="font-size: 20px; margin-top: 50px; cursor: pointer;">+ ADD</p>
-					</div>
-				</div>
-
-
-				<div class="modal fade addmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content" id="dashboard-watchlist-modal">
-							<%= form_tag('/search', remote: true, id: 'search-form', class: 'input-group') do %>
-							<%= text_field_tag :search, params[:search], id: 'search-box', class: 'form-control' %>
-							<span class="input-group-btn">
-								<%= button_tag(type: "submit", class: "btn btn-default") do %>
-								Search
-								<% end %>
-							</span>
-							<% end %>
-							<hr>
-							<div id="return">
-								<p>Enter symbols like "AAPL" or company names like "Apple Inc."</p>
-							</div>
-						</div>
-					</div>
+				<hr>
+				<div id="return">
+					<p>Enter symbols like "AAPL" or company names like "Apple Inc."</p>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-</div>
-

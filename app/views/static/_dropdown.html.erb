@@ -1,0 +1,8 @@
+<div class="text-center">
+
+	<%= image_tag current_user.avatar.url(:thumb), class: "circle" %>
+	<p style="font-size: 20px; margin-top: 10px;"><%= current_user.nickname %></p>
+	<p style="font-size: 20px; margin-top: 10px;"><%= current_user.email %></p>
+	<p style="font-size: 20px; margin-top: 10px; font-family: 'Joseph-Sans';">Rating: <%= current_user.rating %></p>
+	<%= button_to "Setting", setting_path, :id => "styled-button", :method => 'get' %>
+</div>

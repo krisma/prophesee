@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 150px; min-width: 250px; left: 15px; margin-bottom: 10px;">
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 150px; min-width: 250px; left: 45px; margin-bottom: 10px;">
 	<% data = stock.brief["table"] %>
 	<% data = stock.brief["table"] unless data %>
 
@@ -17,8 +17,9 @@
 	<% end %>
 	<p class="dashboard-watchlist-change" style="color: <%= color_id %>; margin-top: -2px"><%= change.to_f.round(2) %> (<%= percent.to_f.round(2) %>%)</p>
 
-	
+	<% if user_signed_in? %>
 	<% @watching = Watching.find_by(user_id: current_user.id, stock_id: stock) %>
+	<% end %>
 	<% if @watching %>
 	<div class="btn-group">
 		<button class="btn btn-default btn-sm dropdown-toggle
@@ -40,21 +41,21 @@
 		<% end %>
 		<span class="caret"></span>
 	</button>
-	<ul class="dropdown-menu" role="menu">
+	<ul class="dropdown-menu" role="menu" style="margin-left: 150px; margin-top: 125px;">
 
 		<% case @watching.attitude %>
 		<% when -1 %>
 		<li><%= link_to "UP", controller: "stocks", action: "up", id: @watching %></li>
 		<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: @watching %></li>
-		<li><%= link_to "UNWATCH", unwatch_path(:id => data["id"]), method: :post %></li>
+		<li><%= link_to "UNWATCH", unwatch_path(:id => data["id"]), method: :post, style: "color: red;" %></li>
 		<% when 0 %>
 		<li><%= link_to "UP", controller: "stocks", action: "up", id: @watching %></li>
 		<li><%= link_to "DOWN", controller: "stocks", action: "down", id: @watching %></li>
-		<li><%= link_to "UNWATCH", unwatch_path(:id => data["id"]), method: :post %></li>
+		<li><%= link_to "UNWATCH", unwatch_path(:id => data["id"]), method: :post, style: "color: red;" %></li>
 		<% when 1 %>
 		<li><%= link_to "DOWN", controller: "stocks", action: "down", id: @watching %></li>
 		<li><%= link_to "NEUTRAL", controller: "stocks", action: "neutral", id: @watching %></li>
-		<li><%= link_to "UNWATCH", unwatch_path(:id => data["id"]), method: :post %></li>
+		<li><%= link_to "UNWATCH", unwatch_path(:id => data["id"]), method: :post, style: "color: red;" %></li>
 		<% end %>
 
 	</ul>

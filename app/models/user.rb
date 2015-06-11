@@ -7,11 +7,17 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :watchings
   has_many :stocks, through: :watchings
+  has_attached_file :avatar, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
 
   def set_default
   	self.nickname = 'N/A'
-    self.rank = 0.0
-    self.photo = 'N/A'
+    self.rating = ENV['USER_RATING_DEFAULT'].to_f
   	self.quota = 5
   end
 

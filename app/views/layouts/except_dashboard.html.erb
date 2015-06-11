@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300' rel='stylesheet' type='text/css'>
+	<title>Prophesee</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<script type="text/javascript">
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+
+	</script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+    </script>
+</head>
+<!-- background-color: rgb(234, 236, 237); -->
+<body 
+style="
+<% case @page_tab  %>
+<% when "index" %>
+background:url(<%= image_path('background.png') %>) no-repeat;
+<% when "dashboard" %>
+background:url(<%= image_path('old_mathematics.png') %>);
+<% end %>
+">
+	<div class="container">
+		<% unless @page_tab == "dashboard" %>
+		<nav class="navbar navbar-default navbar-fixed-top" style="height: 70px; 
+			<% case @page_tab  %>
+			<% when "index" %>
+			background-color: rgba(100, 100, 100, 0.4); 
+			<% when "dashboard", "setting", "show" %>
+			background-color: rgba(100, 100, 100, 1); 
+			<% when "market" %>
+			background-color: rgba(0, 0, 0, 0.7);  
+			<% when "community" %>
+			background-color: rgba(0, 0, 0, 0.7); 
+			<% end %>
+			padding-top: 8px; border-width: 0;">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav">
+					<li id= "nav-links" style="color: white; font-size: 25px; font-weight: bold;"><%= link_to "Prophesee", root_path %></li>
+					
+					<li id="nav-links" class="<%= @page_tab == "dashboard"? "active" : "" %>"><%= link_to "Dashboard", dashboard_path %></li>
+					<li id="nav-links" class="<%= @page_tab == "market"? "active" : "" %>"><%= link_to "Market", market_path %></li>
+					<li id="nav-links" class="<%= @page_tab == "community"? "active" : "" %>"><%= link_to "Community", community_path %></li>
+				</ul>
+				<% if user_signed_in? %>
+				<ul class="nav navbar-nav navbar-right">
+				 <li class="dropdown" id="nav-links">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, <%= current_user.email %> <span class="caret"></span></a>
+		          <ul class="dropdown-menu" role="menu" style="border-width: 0; border-radius: 0; background-color: black;" >
+					<div class="nav-dropdown-box" >
+						<%= render 'static/dropdown' %>
+					</div>
+		          </ul>
+		        </li>
+				</ul>
+				<% else %>
+				 <ul class="nav navbar-nav navbar-right">
+        			<li id="nav-links"><%= link_to "Sign in / Sign up", show_sign_path, remote: true %></li>
+        		</ul>
+        		<% end %>
+			</div>
+		</nav>
+		<% end %>
+
+
+
+
+
+		<div class="
+		<% case @page_tab %>
+		<% when "index", "dashboard" %>
+		total-container
+		<% when "setting", "market", "show" %>
+		lower-total-container
+		<% end %>
+		">
+			<%= render 'layouts/messages' %>
+			<%= yield %>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,13 +1,27 @@
 class StaticController < ApplicationController
   before_action :authenticate_user!, only: [:change_nickname, :dashboard]
+  # layout "except_dashboard", except: [:dashboard]
+  layout :runtime_layout
+
+  def runtime_layout
+    if user_signed_in?
+      'only_dashboard'
+    else
+      'except_dashboard'
+    end
+  end
+
   def index
+    render layout: 'except_dashboard'
   	@posts = Post.all
   	@post = user_signed_in?? current_user.posts.new : Post.new
     @stocks = Stock.all
     @watching = Watching.new
   end
   def dashboard
+
   end
+
 
   def change_nickname
     @user = current_user
@@ -28,6 +42,7 @@ class StaticController < ApplicationController
         requests << s.id
       end
       $redis.set("cache-popular", requests.to_json)
+      $redis.expire("cache-popular", 300)
     else
       data = JSON.parse(tmp)
       @stocks = []
@@ -35,6 +50,16 @@ class StaticController < ApplicationController
         @stocks << Stock.find(d)
       end
     end
+  end
+
+  def setting
+ 
+  end
+  
+  def change_avatar
+    current_user.avatar = params[:avatar]
+    current_user.save
+    redirect_to setting_path
   end
 
   def brief

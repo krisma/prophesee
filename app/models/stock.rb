@@ -56,6 +56,7 @@ class Stock < ActiveRecord::Base
 			tmp[:down] = self.down
 			tmp[:id] = self.id
 			$redis.set(self.symbol, tmp.to_json)
+			$redis.expire(self.symbol, 300)
 			return tmp.to_h
 		else
 			return JSON.parse(tmp).to_h
