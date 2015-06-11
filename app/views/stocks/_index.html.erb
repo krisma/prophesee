@@ -1,0 +1,13 @@
+<% data = Stock.get_index %>
+<% nasdaq = data[0]["table"] %>
+<% snp = data[1]["table"] %>
+<h1 style="font-family: 'Josefin Sans', sans-serif; font-weight: bold; font-size: 25px; color: grey; margin: 10px;">Indices</h1>
+
+<h1 style="font-family: 'Josefin Sans', sans-serif; font-weight: 100;  margin: 10px;">NASDAQ</h1>
+<h1 style="font-family: 'Josefin Sans', sans-serif; font-weight: 100;  margin: 10px;"><%= nasdaq["close"] %></h1>
+<h1 style="font-family: 'Josefin Sans', sans-serif; font-weight: 100;  margin: 10px; font-size: 30px; color: <%= Stock.font_by_change(nasdaq["change_and_percent_change"].split[0].to_f) %>;"><%= nasdaq["change_and_percent_change"].split[0] %>(<%= nasdaq["change_and_percent_change"].split[2] %>)</h1>
+<br>
+<h1 style="font-family: 'Josefin Sans', sans-serif; font-weight: 100;  margin: 10px;">S&P500</h1>
+<h1 style="font-family: 'Josefin Sans', sans-serif; font-weight: 100;  margin: 10px;"><%= snp["close"] %></h1>
+<h1 style="font-family: 'Josefin Sans', sans-serif; font-weight: 100;  margin: 10px; font-size: 30px; color: <%= Stock.font_by_change(snp["change_and_percent_change"].split[0].to_f) %>;"><%= snp["change_and_percent_change"].split[0] %>(<%= snp["change_and_percent_change"].split[2] %>)</h1>
+

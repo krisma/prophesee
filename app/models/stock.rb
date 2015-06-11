@@ -11,6 +11,28 @@ class Stock < ActiveRecord::Base
 		@stock = Stock.create(symbol: search, name: name)
 		return @stock
 	end
+	def self.get_index
+		tmp = $redis.get("index")
+		if tmp.nil?
+			tmp = YahooFinance.quotes(["^IXIC", "^GSPC"], [:close, :change_and_percent_change, :name])
+			$redis.set("index", tmp.to_json)
+			$redis.expire("index", 300)
+			tmp = $redis.get("index")
+			return JSON.parse(tmp)
+		else
+			return JSON.parse(tmp)
+		end
+	end
+	def self.font_by_change(change)
+		if change > 0.0
+			return ENV["COLOR_UP"]
+		elsif change == 0.0
+			return ENV["COLOR_NEUTRAL"]
+		else
+			return ENV["COLOR_DOWN"]
+		end
+	end
+				
 	# def self.init(search)
 	# 	tmp = YahooFinance.quote(search, [:close, :change_and_percent_change, :days_range, :weeks_range_52, :open, :volume, :market_capitalization, :pe_ratio, :dividend_yield, :eps_estimate_current_year , :shares_owned, :name, :stock_exchange, :name, :symbol])
 	# 	symbol = tmp.symbol
@@ -57,9 +79,10 @@ class Stock < ActiveRecord::Base
 			tmp[:id] = self.id
 			$redis.set(self.symbol, tmp.to_json)
 			$redis.expire(self.symbol, 300)
-			return tmp.to_h
+			tmp = $redis.get(self.symbol)
+			return JSON.parse(tmp)
 		else
-			return JSON.parse(tmp).to_h
+			return JSON.parse(tmp)
 		end
 	end
 

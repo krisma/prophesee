@@ -1,9 +1,10 @@
 <% tab "dashboard" %>
 <div class="row">
+	<div class="col-lg-8">
 	<% current_user.stocks.each do |stock| %>
 	<%= render :partial => 'stocks/brief', :locals => { :stock => stock } %>	
 	<% end %>
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 150px; min-width: 250px; padding: 20px; margin-bottom: 10px; left: 30px;">
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 150px; min-width: 250px; padding: 20px; margin-bottom: 10px; left: 20px;">
 		<div style="border-style: dashed; border-width: 2px; border-color: grey; width: 260px; height: 120px;" type="button" data-toggle="modal" data-target=".addmodal" id="dashboard-watchlist-add">
 			<p class="text-center" style="font-size: 20px; margin-top: 50px; cursor: pointer;">+ ADD</p>
 		</div>
@@ -27,5 +28,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	</div>
+	<div class="col-lg-4 text-center" style="height: 500px; padding-top: 0px;">
+		<%= render 'stocks/index' %>
 	</div>
 </div>
